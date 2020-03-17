@@ -1,0 +1,64 @@
+@import "../../../../sass/colors.scss";
+
+.container {
+  display: flex;
+  align-items: center;
+  color: grey;
+
+  * {
+    transition: all 0.1s ease;
+  }
+
+  .title-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    * {
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 1em;
+      padding: 0px;
+      font-weight: 500;
+    }
+  }
+
+  .checkbox {
+    border-radius: 50%;
+    height: 18px;
+    width: 18px;
+    margin: 0px 10px;
+    display: flex;
+    justify-content: center;
+
+    i {
+      font-size: 16px;
+      line-height: 18px;
+      opacity: 1;
+      color: $primary;
+    }
+  }
+
+  .draggable-indicator {
+    opacity: 0;
+    color: grey;
+  }
+}
+
+.container:hover {
+  cursor: pointer;
+  .checkbox {
+    background-color: $primary;
+    i {
+      opacity: 1;
+      color: white;
+    }
+  }
+  color: $primary;
+}
+
+hr {
+  border: 0.5px solid rgb(219, 219, 219);
+  margin-top: 16px;
+}

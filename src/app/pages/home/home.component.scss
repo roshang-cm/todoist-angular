@@ -1,0 +1,16 @@
+div {
+  display: flex;
+  flex: 1;
+  height: 100%;
+}
+
+aside {
+  width: 200px;
+}
+
+main {
+  flex: 1;
+  height: 100%;
+  background-color: white;
+  padding: 50px 24px;
+}

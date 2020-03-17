@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+
+  * {
+    transition: all 0.1s ease;
+  }
+
+  .draggable-indicator {
+    opacity: 0;
+    color: grey;
+  }
+}
+
+.container:hover {
+  .draggable-indicator {
+    opacity: 1;
+    cursor: pointer;
+  }
+}

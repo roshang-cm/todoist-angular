@@ -56,6 +56,11 @@
   }
 }
 
+.draggable-indicator:active:hover {
+  opacity: 1;
+  cursor: move;
+}
+
 .container:hover {
   .draggable-indicator {
     opacity: 1;

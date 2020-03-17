@@ -1,4 +1,9 @@
 import { Component, OnInit, Input } from "@angular/core";
+import {
+  CdkDragDrop,
+  transferArrayItem,
+  moveItemInArray
+} from "@angular/cdk/drag-drop";
 
 @Component({
   selector: "app-home",
@@ -6,7 +11,22 @@ import { Component, OnInit, Input } from "@angular/core";
   styleUrls: ["./home.component.scss"]
 })
 export class HomeComponent implements OnInit {
+  mockTasks = [1, 2, 3, 4, 5, 6];
+
   constructor() {}
 
   ngOnInit(): void {}
+
+  drop(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer !== event.container) {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    } else {
+      moveItemInArray(this.mockTasks, event.previousIndex, event.currentIndex);
+    }
+  }
 }

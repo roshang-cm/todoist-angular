@@ -1,4 +1,4 @@
-div {
+.container {
   display: flex;
   flex: 1;
   height: 100%;
@@ -13,4 +13,9 @@ main {
   height: 100%;
   background-color: white;
   padding: 50px 24px;
+}
+
+.list-container {
+  display: flex;
+  flex-direction: column;
 }

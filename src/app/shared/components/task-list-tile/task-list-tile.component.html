@@ -1,12 +1,12 @@
-<div class="container">
-  <div class="draggable-indicator">
+<div class="container" cdkDrag>
+  <div cdkDragHandle class="draggable-indicator">
     <i class="material-icons">drag_indicator</i>
   </div>
   <div class="checkbox">
     <i class="material-icons">done</i>
   </div>
   <div class="title-section">
-    <h1>Task title</h1>
+    <h1>{{ title }}</h1>
     <h2>Task subtitle</h2>
   </div>
   <div class="actions"></div>

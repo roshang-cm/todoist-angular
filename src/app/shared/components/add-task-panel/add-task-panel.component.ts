@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-add-task-panel',
-  templateUrl: './add-task-panel.component.html',
-  styleUrls: ['./add-task-panel.component.scss']
+  selector: "app-add-task-panel",
+  templateUrl: "./add-task-panel.component.html",
+  styleUrls: ["./add-task-panel.component.scss"]
 })
 export class AddTaskPanelComponent implements OnInit {
+  task = {
+    title: ""
+  };
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

@@ -8,14 +8,15 @@
       <input
         class="flex-fill"
         type="text"
-        name=""
-        id=""
+        [(ngModel)]="task.title"
         placeholder="Enter task"
       />
       <input type="date" name="" id="" />
     </div>
     <div class="row">
-      <button class="primary">Add Task</button>
+      <button class="primary" [disabled]="task.title.length == 0">
+        Add Task
+      </button>
       <button>Cancel</button>
 
       <div class="spacer"></div>

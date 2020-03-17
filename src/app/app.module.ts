@@ -11,6 +11,7 @@ import { AddTaskListTileComponent } from "./shared/components/add-task-list-tile
 import { AddTaskPanelComponent } from "./shared/components/add-task-panel/add-task-panel.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { DragDropModule } from "@angular/cdk/drag-drop";
+import { FormsModule } from "@angular/forms";
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +23,12 @@ import { DragDropModule } from "@angular/cdk/drag-drop";
     AddTaskListTileComponent,
     AddTaskPanelComponent
   ],
-  imports: [BrowserModule, BrowserAnimationsModule, DragDropModule],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    DragDropModule,
+    FormsModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

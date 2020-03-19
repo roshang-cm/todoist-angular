@@ -14,10 +14,14 @@
       <input type="date" name="" id="" />
     </div>
     <div class="row">
-      <button class="primary" [disabled]="task.title.length == 0">
+      <button
+        class="primary"
+        [disabled]="task.title.length == 0"
+        (click)="onAddTaskClicked()"
+      >
         Add Task
       </button>
-      <button>Cancel</button>
+      <button (click)="onCancelClicked()">Cancel</button>
 
       <div class="spacer"></div>
       <button>Actions</button>

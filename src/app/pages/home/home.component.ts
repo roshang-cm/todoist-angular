@@ -4,6 +4,7 @@ import {
   transferArrayItem,
   moveItemInArray
 } from "@angular/cdk/drag-drop";
+import { Task } from "src/app/shared/models/task.model";
 
 @Component({
   selector: "app-home",
@@ -11,7 +12,16 @@ import {
   styleUrls: ["./home.component.scss"]
 })
 export class HomeComponent implements OnInit {
-  mockTasks = [1, 2, 3, 4, 5, 6];
+  mockTasks = [new Task(), new Task(), new Task(), new Task()];
+  isAddTaskVisible = false;
+
+  setAddTaskVisible(newSetting) {
+    this.isAddTaskVisible = newSetting;
+  }
+
+  addTask(task: Task) {
+    this.mockTasks.push(task);
+  }
 
   constructor() {}
 

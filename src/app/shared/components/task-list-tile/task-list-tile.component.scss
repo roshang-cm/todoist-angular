@@ -42,6 +42,20 @@
     }
   }
 
+  .collapse {
+    i {
+      font-size: 20px;
+      line-height: 18px;
+      color: grey;
+    }
+    cursor: pointer;
+  }
+
+  .root {
+    display: flex;
+    flex-direction: column;
+  }
+
   .checkbox:hover {
     cursor: pointer;
     background-color: rgb(221, 221, 221);
@@ -71,4 +85,34 @@
 hr {
   border: 0.5px solid rgb(219, 219, 219);
   margin-top: 16px;
+}
+
+.checked {
+  .title-section {
+    text-decoration: line-through;
+    opacity: 0.3;
+    filter: grayscale(1);
+  }
+
+  .checkbox {
+    opacity: 1;
+    i {
+      opacity: 1;
+    }
+  }
+}
+
+.cdk-drop-list-dragging {
+  background: lightgreen;
+}
+
+.placeholder {
+  background: #ccc;
+  border: dotted 3px #999;
+  min-height: 60px;
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.droptarget {
+  height: 50px;
 }

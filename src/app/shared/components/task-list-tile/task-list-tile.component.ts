@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { Task } from "../../models/task.model";
 
 @Component({
   selector: "app-task-list-tile",
@@ -6,7 +7,19 @@ import { Component, OnInit, Input } from "@angular/core";
   styleUrls: ["./task-list-tile.component.scss"]
 })
 export class TaskListTileComponent implements OnInit {
-  @Input() title = "Undefined";
+  @Input() task: Task;
+  @Output() checkChanged = new EventEmitter();
+
+  isDragEnter = false;
+
+  onCheckClicked() {
+    this.task.checked = !this.task.checked;
+    this.checkChanged.emit(this.task);
+  }
+
+  onDragEnter() {
+    this.isDragEnter = true;
+  }
 
   constructor() {}
 

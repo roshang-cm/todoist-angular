@@ -6,11 +6,18 @@
     <app-page-title></app-page-title>
     <div class="list-container" cdkDropList (cdkDropListDropped)="drop($event)">
       <app-task-list-tile
-        title="Task title {{ item }}"
-        *ngFor="let item of mockTasks"
+        [task]="task"
+        *ngFor="let task of mockTasks"
       ></app-task-list-tile>
     </div>
-    <app-add-task-list-tile></app-add-task-list-tile>
-    <app-add-task-panel></app-add-task-panel>
+    <app-add-task-list-tile
+      *ngIf="!isAddTaskVisible"
+      (click)="setAddTaskVisible(true)"
+    ></app-add-task-list-tile>
+    <app-add-task-panel
+      *ngIf="isAddTaskVisible"
+      (cancel)="setAddTaskVisible(false)"
+      (add)="addTask($event)"
+    ></app-add-task-panel>
   </main>
 </div>

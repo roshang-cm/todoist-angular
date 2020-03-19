@@ -1,14 +1,26 @@
-<div class="container" cdkDrag>
-  <div cdkDragHandle class="draggable-indicator">
-    <i class="material-icons">drag_indicator</i>
+<div class="root" cdkDrag>
+  <div class="container" [ngClass]="{ checked: task.checked }">
+    <div class="placeholder" *cdkDragPlaceholder></div>
+    <div cdkDragHandle class="draggable-indicator">
+      <i class="material-icons">drag_indicator</i>
+    </div>
+    <div class="collapse">
+      <i class="material-icons">keyboard_arrow_right</i>
+    </div>
+    <div class="checkbox" (click)="onCheckClicked()">
+      <i class="material-icons">done</i>
+    </div>
+    <div class="title-section">
+      <h1>{{ task.title }}</h1>
+      <h2>Task subtitle</h2>
+    </div>
+    <div class="actions"></div>
   </div>
-  <div class="checkbox">
-    <i class="material-icons">done</i>
-  </div>
-  <div class="title-section">
-    <h1>{{ title }}</h1>
-    <h2>Task subtitle</h2>
-  </div>
-  <div class="actions"></div>
+  <!-- <div
+    class="droptarget"
+    cdkDropList
+    [ngClass]="{ dragging: isDragEnter }"
+    (dragenter)="onDragEnter()"
+  ></div> -->
+  <hr />
 </div>
-<hr />

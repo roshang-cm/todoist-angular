@@ -17,8 +17,18 @@ export class AddTaskPanelComponent implements OnInit {
   }
 
   onAddTaskClicked() {
+    if (this.task.title.length === 0) {
+      return;
+    }
     this.add.emit(this.task);
     this.task = new Task(); // Resetting the form
+  }
+
+  onCtrlEnter(event: KeyboardEvent) {
+    if (event.key === "Enter" && event.ctrlKey) {
+      this.onAddTaskClicked();
+    }
+    console.log("Entere");
   }
 
   constructor() {}

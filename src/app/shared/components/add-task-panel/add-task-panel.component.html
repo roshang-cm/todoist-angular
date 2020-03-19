@@ -8,6 +8,7 @@
       <input
         class="flex-fill"
         type="text"
+        (keydown)="onCtrlEnter($event)"
         [(ngModel)]="task.title"
         placeholder="Enter task"
       />

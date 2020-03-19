@@ -12,10 +12,10 @@ import { Task } from "src/app/shared/models/task.model";
   styleUrls: ["./home.component.scss"]
 })
 export class HomeComponent implements OnInit {
-  mockTasks = [new Task(), new Task(), new Task(), new Task()];
+  mockTasks: Task[] = [];
   isAddTaskVisible = false;
 
-  setAddTaskVisible(newSetting) {
+  setAddTaskVisible(newSetting: boolean) {
     this.isAddTaskVisible = newSetting;
   }
 

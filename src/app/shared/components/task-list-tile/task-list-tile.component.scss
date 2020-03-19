@@ -43,10 +43,12 @@
   }
 
   .collapse {
+    display: none;
     i {
       font-size: 20px;
       line-height: 18px;
       color: grey;
+      opacity: 0;
     }
     cursor: pointer;
   }

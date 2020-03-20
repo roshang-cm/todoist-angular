@@ -1,0 +1,52 @@
+@import "../../../sass/colors.scss";
+
+button {
+  border-radius: 4px;
+  margin: 0;
+  padding: 0;
+}
+
+.highlight {
+  background-color: transparent;
+}
+
+.highlight:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+.info {
+  color: $info;
+}
+
+.primary {
+  color: $primary;
+}
+
+.secondary {
+  color: $secondary;
+}
+
+.error {
+  color: $error;
+}
+
+.warning {
+  color: $warning;
+}
+
+.success {
+  color: $success;
+}
+.white {
+  color: white;
+}
+
+.white.highlight:hover {
+  background-color: rgba(255, 255, 255, 0.075);
+}
+
+.disabled {
+  opacity: 0.4;
+  filter: grayscale(1);
+  cursor: not-allowed;
+  pointer-events: none;
+}

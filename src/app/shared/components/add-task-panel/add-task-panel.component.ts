@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from "@angular/core";
-import { Task } from "../../models/task.model";
+import { Task } from "../../../models/task.model";
 
 @Component({
   selector: "app-add-task-panel",

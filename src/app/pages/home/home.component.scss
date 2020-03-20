@@ -1,11 +1,11 @@
 .container {
   display: flex;
-  flex: 1;
   height: 100%;
+  overflow: hidden;
 }
 
-aside {
-  width: 200px;
+.aside {
+  width: 250px;
 }
 
 main {
@@ -13,6 +13,9 @@ main {
   height: 100%;
   background-color: white;
   padding: 50px 24px;
+  border: 1px solid rgba(128, 128, 128, 0.178);
+  border-top: none;
+  border-bottom: none;
 }
 
 .list-container {

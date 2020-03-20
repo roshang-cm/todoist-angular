@@ -1,0 +1,13 @@
+<button
+  [ngClass]="
+    (disabled ? 'disabled ' : '') +
+    '' +
+    color +
+    ' ' +
+    (backgroundHighlight ? 'highlight' : '')
+  "
+>
+  <i class="material-icons">
+    <ng-content></ng-content>
+  </i>
+</button>

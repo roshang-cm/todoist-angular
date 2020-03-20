@@ -4,7 +4,7 @@ import {
   transferArrayItem,
   moveItemInArray
 } from "@angular/cdk/drag-drop";
-import { Task } from "src/app/shared/models/task.model";
+import { Task } from "src/app/models/task.model";
 
 @Component({
   selector: "app-home",

@@ -1,0 +1,43 @@
+@import "../../../sass/colors.scss";
+
+.main {
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  background-color: transparent;
+  margin: 4px;
+  padding: 2px 6px;
+}
+
+.main.selected {
+  background-color: white;
+}
+
+.main.selected > * {
+  color: $primary;
+}
+.main:hover {
+  background-color: rgba(128, 128, 128, 0.144);
+  cursor: pointer;
+}
+
+h3,
+h4 {
+  margin: 0;
+}
+
+.title-section {
+  display: flex;
+  align-items: baseline;
+}
+
+h3 {
+  font-size: 0.9em;
+  font-weight: 400;
+  margin: 4px;
+}
+
+h4 {
+  font-size: 0.7em;
+  font-weight: 400;
+}

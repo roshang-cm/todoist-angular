@@ -1,0 +1,16 @@
+<div class="main">
+  <app-icon-button [ngClass]="{ rotated: expanded }" (click)="toggleExpanded()"
+    >arrow_right</app-icon-button
+  >
+  <div class="title-section clickable" (click)="toggleExpanded()">
+    <h3>Hello</h3>
+  </div>
+  <div class="spacer clickable" (click)="toggleExpanded()"></div>
+  <div class="menu">
+    <i class="material-icons">add</i>
+  </div>
+</div>
+
+<div [ngClass]="'collapsible' + ' ' + (expanded ? 'visible' : '')">
+  <ng-content></ng-content>
+</div>

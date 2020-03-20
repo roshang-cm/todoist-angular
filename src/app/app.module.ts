@@ -12,6 +12,11 @@ import { AddTaskPanelComponent } from "./shared/components/add-task-panel/add-ta
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { DragDropModule } from "@angular/cdk/drag-drop";
 import { FormsModule } from "@angular/forms";
+import { SidenavComponent } from "./components/sidenav/sidenav.component";
+import { SideNavItemComponent } from "./shared/side-nav-item/side-nav-item.component";
+import { CollapsibleSideNavItemComponent } from "./shared/collapsible-side-nav-item/collapsible-side-nav-item.component";
+import { IconButtonComponent } from "./shared/icon-button/icon-button.component";
+import { ToastComponent } from "./shared/components/toast/toast.component";
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +26,12 @@ import { FormsModule } from "@angular/forms";
     PageTitleComponent,
     TaskListTileComponent,
     AddTaskListTileComponent,
-    AddTaskPanelComponent
+    AddTaskPanelComponent,
+    SidenavComponent,
+    SideNavItemComponent,
+    CollapsibleSideNavItemComponent,
+    IconButtonComponent,
+    ToastComponent
   ],
   imports: [
     BrowserModule,

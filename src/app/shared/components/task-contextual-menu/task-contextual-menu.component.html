@@ -1,0 +1,32 @@
+<div class="container">
+  <app-menu-item icon="arrow_upward">
+    Add task above
+  </app-menu-item>
+  <app-menu-item icon="arrow_downward"> Add task below </app-menu-item
+  ><app-menu-item icon="create">
+    Edit task
+  </app-menu-item>
+  <hr />
+  <div class="section-header">
+    Schedule
+  </div>
+  <div class="actions">
+    <app-icon-button backgroundHighlight="true">today</app-icon-button>
+    <app-icon-button backgroundHighlight="true"
+      >arrow_right_alt</app-icon-button
+    >
+    <app-icon-button backgroundHighlight="true">view_week</app-icon-button>
+
+    <app-icon-button backgroundHighlight="true">more_horiz</app-icon-button>
+  </div>
+  <div class="section-header">
+    Priority
+  </div>
+  <div style="margin-left: 16px;">
+    <app-priority-selector [task]="task"></app-priority-selector>
+  </div>
+  <hr />
+  <app-menu-item icon="face">
+    Reminders
+  </app-menu-item>
+</div>

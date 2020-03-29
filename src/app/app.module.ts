@@ -1,5 +1,6 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 
 import { AppComponent } from "./app.component";
 import { HomeComponent } from "./pages/home/home.component";
@@ -17,6 +18,15 @@ import { SideNavItemComponent } from "./shared/side-nav-item/side-nav-item.compo
 import { CollapsibleSideNavItemComponent } from "./shared/collapsible-side-nav-item/collapsible-side-nav-item.component";
 import { IconButtonComponent } from "./shared/icon-button/icon-button.component";
 import { ToastComponent } from "./shared/components/toast/toast.component";
+import { ToastHolderComponent } from "./shared/components/toast-holder/toast-holder.component";
+import { AuthInterceptorInterceptor } from "./interceptors/auth-interceptor.interceptor";
+import { DropdownComponent } from './shared/components/dropdown/dropdown.component';
+import { DropdownToggleComponent } from './shared/components/dropdown-toggle/dropdown-toggle.component';
+import { DropdownContentComponent } from './shared/components/dropdown-content/dropdown-content.component';
+import { MenuItemComponent } from './shared/components/menu-item/menu-item.component';
+import { TaskContextualMenuComponent } from './shared/components/task-contextual-menu/task-contextual-menu.component';
+import { TaskContextualScheduleMenuComponent } from './shared/components/task-contextual-schedule-menu/task-contextual-schedule-menu.component';
+import { PrioritySelectorComponent } from './shared/components/priority-selector/priority-selector.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,15 +41,30 @@ import { ToastComponent } from "./shared/components/toast/toast.component";
     SideNavItemComponent,
     CollapsibleSideNavItemComponent,
     IconButtonComponent,
-    ToastComponent
+    ToastComponent,
+    ToastHolderComponent,
+    DropdownComponent,
+    DropdownToggleComponent,
+    DropdownContentComponent,
+    MenuItemComponent,
+    TaskContextualMenuComponent,
+    TaskContextualScheduleMenuComponent,
+    PrioritySelectorComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     DragDropModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

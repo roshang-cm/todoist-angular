@@ -1,0 +1,30 @@
+.actions > * {
+  display: inline;
+}
+
+.white {
+  color: grey;
+}
+
+.selected > * {
+  border: 1.5px solid rgb(167, 167, 167);
+  border-radius: 4px;
+}
+
+i:hover {
+  background-color: rgba(128, 128, 128, 0.116);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.blue {
+  color: rgb(86, 125, 196);
+}
+
+.orange {
+  color: rgb(252, 143, 70);
+}
+
+.red {
+  color: rgb(211, 0, 0);
+}

@@ -1,0 +1,15 @@
+.container {
+  width: 100%;
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  bottom: 0;
+  z-index: 10000;
+  padding: 24px;
+
+  @media only screen and (max-width: 600px) {
+    align-items: center;
+    padding: 0px 0px 24px 0px;
+  }
+}

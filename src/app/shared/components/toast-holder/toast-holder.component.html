@@ -1,0 +1,7 @@
+<div class="container">
+  <app-toast
+    @enterLeave
+    *ngFor="let toast of getToasts()"
+    [toast]="toast"
+  ></app-toast>
+</div>

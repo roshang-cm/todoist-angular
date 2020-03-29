@@ -6,8 +6,9 @@
     <app-page-title></app-page-title>
     <div class="list-container" cdkDropList (cdkDropListDropped)="drop($event)">
       <app-task-list-tile
+        (checkChanged)="onCheckChanged($event)"
         [task]="task"
-        *ngFor="let task of mockTasks"
+        *ngFor="let task of getTasks()"
       ></app-task-list-tile>
     </div>
     <app-add-task-list-tile

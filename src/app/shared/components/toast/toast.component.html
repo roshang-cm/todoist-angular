@@ -1,8 +1,14 @@
 <div class="toast">
   <div class="span">
-    You are now offline
+    {{ toast.message }}
   </div>
   <div class="actions">
-    <button class="primary">Undo</button>
+    <button
+      *ngFor="let action of toast.actions"
+      [class.primary]="action.type === 'primary'"
+      (click)="action.callback(toast)"
+    >
+      {{ action.name }}
+    </button>
   </div>
 </div>

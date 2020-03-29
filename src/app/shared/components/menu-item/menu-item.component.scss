@@ -1,0 +1,19 @@
+.row {
+  padding: 4px 16px;
+  display: flex;
+  align-items: center;
+}
+
+.row:hover {
+  background-color: rgba(128, 128, 128, 0.116);
+}
+
+span {
+  font-size: 0.8rem;
+  margin-left: 12px;
+}
+
+i {
+  color: rgb(145, 145, 145);
+  font-size: 1.3rem;
+}

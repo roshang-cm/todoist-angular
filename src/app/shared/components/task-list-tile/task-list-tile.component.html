@@ -14,7 +14,18 @@
       <h1>{{ task.title }}</h1>
       <h2>Task subtitle</h2>
     </div>
-    <div class="actions"></div>
+    <div class="spacer"></div>
+    <div class="actions">
+      <app-icon-button backgroundHighlight="true">event_note</app-icon-button>
+    </div>
+    <app-dropdown isVisible="true">
+      <app-dropdown-toggle>
+        <app-icon-button backgroundHighlight="true">more_horiz</app-icon-button>
+      </app-dropdown-toggle>
+      <app-dropdown-content>
+        <app-task-contextual-menu [task]="task"></app-task-contextual-menu>
+      </app-dropdown-content>
+    </app-dropdown>
   </div>
   <!-- <div
     class="droptarget"

@@ -1,9 +1,11 @@
+import * as moment from "moment";
+
 export class Task {
   id: number;
   title: string;
   project: number;
   label: number;
-  dueDate: Date;
+  dueDate: moment.Moment;
   priority: number;
   section: number;
   parent: number;
@@ -15,7 +17,7 @@ export class Task {
     title: string = "",
     project: number = null,
     label: number = null,
-    dueDate: Date = null,
+    dueDate: moment.Moment = null,
     priority: number = null,
     section: number = null,
     parent: number = null,
@@ -40,7 +42,7 @@ export class Task {
       object.title,
       object.project,
       object.label,
-      object.dueDate,
+      moment(object.dueDate),
       object.priority,
       object.section,
       object.parent,

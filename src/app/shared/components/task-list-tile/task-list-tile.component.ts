@@ -13,7 +13,6 @@ export class TaskListTileComponent implements OnInit {
   isDragEnter = false;
 
   onCheckClicked() {
-    this.task.checked = !this.task.checked;
     this.checkChanged.emit(this.task);
   }
 

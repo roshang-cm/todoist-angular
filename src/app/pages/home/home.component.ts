@@ -5,6 +5,15 @@ import {
   moveItemInArray
 } from "@angular/cdk/drag-drop";
 import { Task } from "src/app/models/task.model";
+import { TaskService } from "src/app/services/task.service";
+import {
+  ToastService,
+  ToastAction,
+  Toast,
+  defaultUndoAction
+} from "src/app/services/toast.service";
+import { TaskHttpService } from "src/app/services/task-http.service";
+import { AuthServiceService } from "src/app/services/auth-service.service";
 
 @Component({
   selector: "app-home",
@@ -12,7 +21,6 @@ import { Task } from "src/app/models/task.model";
   styleUrls: ["./home.component.scss"]
 })
 export class HomeComponent implements OnInit {
-  mockTasks: Task[] = [];
   isAddTaskVisible = false;
 
   setAddTaskVisible(newSetting: boolean) {
@@ -20,10 +28,22 @@ export class HomeComponent implements OnInit {
   }
 
   addTask(task: Task) {
-    this.mockTasks.push(task);
+    this.taskService.addTask(task);
+  }
+  getTasks() {
+    return this.taskService.tasks;
   }
 
-  constructor() {}
+  onCheckChanged(task: Task) {
+    task.checked = !task.checked;
+    this.taskService.updateTask(task);
+  }
+  constructor(
+    private taskService: TaskService,
+    private toastService: ToastService,
+    private httpService: TaskHttpService,
+    private authService: AuthServiceService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -36,7 +56,11 @@ export class HomeComponent implements OnInit {
         event.currentIndex
       );
     } else {
-      moveItemInArray(this.mockTasks, event.previousIndex, event.currentIndex);
+      moveItemInArray(
+        this.taskService.tasks,
+        event.previousIndex,
+        event.currentIndex
+      );
     }
   }
 }

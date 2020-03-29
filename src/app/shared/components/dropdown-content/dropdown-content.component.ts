@@ -60,9 +60,8 @@ export class DropdownContentComponent implements OnInit, OnDestroy {
     this.listener = this.renderer.listen("window", "click", (e: Event) => {
       console.log("Still running");
       console.log("The id is", this.dropdownId);
-      const isToggleClicked = this.toggleRef.elementRef.nativeElement.contains(
-        e.target
-      );
+      const isToggleClicked = (this
+        .toggleRef as any).elementRef.nativeElement.contains(e.target);
       console.log("Is toggle clicked ", isToggleClicked);
       if (!this.selfRef.nativeElement.contains(e.target) && !isToggleClicked) {
         this.disableVisible();

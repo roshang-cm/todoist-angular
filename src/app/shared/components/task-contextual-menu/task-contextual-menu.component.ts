@@ -28,12 +28,12 @@ export class TaskContextualMenuComponent implements OnInit {
       case "tomorrow":
         this.task.dueDate = this.dateService.tomorrow;
         this.task.withTime = false;
-        this.taskService.updateTask(this.task);
+        this.taskService.updateTask(updatedTask);
         break;
       case "nw":
         this.task.dueDate = this.dateService.nextWeek;
         this.task.withTime = false;
-        this.taskService.updateTask(this.task);
+        this.taskService.updateTask(updatedTask);
         break;
 
       default:

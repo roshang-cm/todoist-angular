@@ -15,6 +15,10 @@ import {
 import { TaskHttpService } from "src/app/services/task-http.service";
 import { AuthServiceService } from "src/app/services/auth-service.service";
 
+export interface TaskListComponentType {
+  type: "task" | "open_add_task" | "closed_add_task";
+  task: Task;
+}
 @Component({
   selector: "app-home",
   templateUrl: "./home.component.html",
@@ -22,7 +26,7 @@ import { AuthServiceService } from "src/app/services/auth-service.service";
 })
 export class HomeComponent implements OnInit {
   isAddTaskVisible = false;
-
+  componentList = [];
   setAddTaskVisible(newSetting: boolean) {
     this.isAddTaskVisible = newSetting;
   }
@@ -35,8 +39,10 @@ export class HomeComponent implements OnInit {
   }
 
   onCheckChanged(task: Task) {
-    task.checked = !task.checked;
-    this.taskService.updateTask(task);
+    //task.checked = !task.checked;
+    const updatedTask = Task.fromJson(task);
+    updatedTask.checked = !updatedTask.checked;
+    this.taskService.updateTask(updatedTask);
   }
   constructor(
     private taskService: TaskService,

@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { Task } from "../models/task.model";
 import { v4 as uuid4 } from "uuid";
 import { TaskHttpService } from "./task-http.service";
+import { ToastService, Toast } from "./toast.service";
 
 export interface SyncAction {
   id: number | string;
@@ -40,14 +41,14 @@ export class TaskService {
   }
 
   private sync() {
-    //Must apply all pending actions to backend
-    this._syncActions.forEach(syncAction => {
-      this.taskHttpService.executeSyncAction(
-        syncAction,
-        this.onSyncActionComplete
-      );
-    });
-    //Then fetch the latest copy from server
+    // Must apply all pending actions to backend
+    // this._syncActions.forEach(syncAction => {
+    //   this.taskHttpService.executeSyncAction(
+    //     syncAction,
+    //     this.onSyncActionComplete
+    //   );
+    // });
+    // Then fetch the latest copy from server
     this.updateCache();
   }
 
@@ -57,6 +58,9 @@ export class TaskService {
     let syncActions = [];
     if (data) {
       tasks = data.tasks;
+      tasks = tasks.map(task => {
+        return Task.fromJson(task);
+      });
       syncActions = data.syncActions;
     }
     return {
@@ -70,12 +74,14 @@ export class TaskService {
   }
 
   addTask(task: Task) {
+    task.id = uuid4();
     this._tasks.push(task);
     this.addToSyncActions(task, "ADD_TASK");
     this.sync();
+    console.log("ADDED NEW TASK ==> ", task.id);
   }
 
-  updateTask(task: Task) {
+  updateTask(task: Task, noToast: boolean = false) {
     let index = -1;
     this._tasks.forEach((taskInList, indexOfTask) => {
       if (taskInList.id === task.id) {
@@ -85,11 +91,36 @@ export class TaskService {
     if (index === -1) {
       return;
     }
+
+    const previousTask = Task.fromJson(this._tasks[index]);
     this._tasks[index] = task;
     this.addToSyncActions(task, "UPDATE_TASK");
+    this.sync();
+    console.log("PREVIOUSLY", previousTask, "TO", task);
+    console.log("UPDATED TASK ==> ", task.id);
+    if (noToast) {
+      return;
+    }
+    this.toastService.show({
+      previousTask,
+      task,
+      message: "Task updated",
+      actions: [
+        {
+          name: "Undo",
+          type: "primary",
+          callback: (toast: Toast) => {
+            this.updateTask(toast.previousTask, true);
+          }
+        }
+      ]
+    });
   }
 
-  constructor(private taskHttpService: TaskHttpService) {
+  constructor(
+    private taskHttpService: TaskHttpService,
+    private toastService: ToastService
+  ) {
     const cachedData = this.readFromCache();
     this._tasks = cachedData.tasks;
     this._syncActions = cachedData.syncActions;

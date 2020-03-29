@@ -35,6 +35,15 @@
     display: flex;
     justify-content: center;
 
+    &.red {
+      border-color: rgba(206, 0, 0, 0.808);
+    }
+    &.orange {
+      border-color: rgba(252, 140, 75, 0.664);
+    }
+    &.blue {
+      border-color: rgba(27, 91, 175, 0.63);
+    }
     i {
       font-size: 16px;
       line-height: 18px;
@@ -99,6 +108,15 @@ hr {
 
   .checkbox {
     opacity: 1;
+    &.red {
+      border-color: rgba(128, 128, 128, 0.336);
+    }
+    &.orange {
+      border-color: rgba(128, 128, 128, 0.336);
+    }
+    &.blue {
+      border-color: rgba(128, 128, 128, 0.336);
+    }
     i {
       opacity: 1;
     }

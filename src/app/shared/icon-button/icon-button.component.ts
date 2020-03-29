@@ -18,6 +18,8 @@ export class IconButtonComponent implements OnInit {
 
   @Input() disabled = false;
 
+  @Input() title?: string = "";
+
   constructor() {}
 
   ngOnInit(): void {}

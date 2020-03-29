@@ -7,18 +7,26 @@
     <div class="collapse">
       <i class="material-icons">keyboard_arrow_right</i>
     </div>
-    <div class="checkbox" (click)="onCheckClicked()">
+    <div
+      class="checkbox"
+      (click)="onCheckClicked()"
+      [class.blue]="task.priority === 1"
+      [class.orange]="task.priority === 2"
+      [class.red]="task.priority === 3"
+    >
       <i class="material-icons">done</i>
     </div>
     <div class="title-section">
       <h1>{{ task.title }}</h1>
-      <h2>Task subtitle</h2>
+      <h2 *ngIf="task.dueDate">
+        {{ humanizedDate }}
+      </h2>
     </div>
     <div class="spacer"></div>
     <div class="actions">
       <app-icon-button backgroundHighlight="true">event_note</app-icon-button>
     </div>
-    <app-dropdown isVisible="true">
+    <app-dropdown>
       <app-dropdown-toggle>
         <app-icon-button backgroundHighlight="true">more_horiz</app-icon-button>
       </app-dropdown-toggle>

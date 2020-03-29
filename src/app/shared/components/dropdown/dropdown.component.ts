@@ -10,6 +10,7 @@ import {
 } from "@angular/core";
 import { DropdownToggleComponent } from "../dropdown-toggle/dropdown-toggle.component";
 import { DropdownContentComponent } from "../dropdown-content/dropdown-content.component";
+import { DropdownService } from "src/app/services/dropdown.service";
 
 @Component({
   selector: "app-dropdown",
@@ -27,13 +28,14 @@ export class DropdownComponent implements OnInit, AfterContentInit {
   dropdownContentComponent: DropdownContentComponent;
 
   @Input() isVisible = false;
-  constructor() {}
+  constructor(private dropdownService: DropdownService) {}
 
   ngOnInit(): void {}
 
   ngAfterContentInit() {
     console.log(this.dropdownToggleComponentRef);
-    this.dropdownContentComponent.setVisible(this.isVisible);
+    const dropdownId = this.dropdownService.openDropdown();
+    this.dropdownContentComponent.setDropdownId(dropdownId);
     this.dropdownContentComponent.setToggleRef(this.dropdownToggleComponentRef);
     this.dropdownToggleComponent.setOnClickedAction(() => {
       this.isVisible = !this.isVisible;

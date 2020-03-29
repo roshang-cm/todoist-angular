@@ -1,5 +1,9 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { Toast } from "src/app/services/toast.service";
+import {
+  Toast,
+  ToastAction,
+  ToastService
+} from "src/app/services/toast.service";
 import {
   trigger,
   transition,
@@ -15,7 +19,10 @@ import {
 })
 export class ToastComponent implements OnInit {
   @Input() toast: Toast;
-  constructor() {}
-
+  constructor(private toastService: ToastService) {}
+  actionClicked(action: ToastAction) {
+    action.callback(this.toast);
+    this.toastService.dismissToast(this.toast.id);
+  }
   ngOnInit(): void {}
 }

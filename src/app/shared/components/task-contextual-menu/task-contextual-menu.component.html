@@ -11,13 +11,31 @@
     Schedule
   </div>
   <div class="actions">
-    <app-icon-button backgroundHighlight="true">today</app-icon-button>
-    <app-icon-button backgroundHighlight="true"
+    <app-icon-button
+      backgroundHighlight="true"
+      title="Today"
+      (click)="onDateOptionClicked('today')"
+      >today</app-icon-button
+    >
+    <app-icon-button
+      backgroundHighlight="true"
+      title="Tomorrow"
+      (click)="onDateOptionClicked('tomorrow')"
       >arrow_right_alt</app-icon-button
     >
-    <app-icon-button backgroundHighlight="true">view_week</app-icon-button>
+    <app-icon-button
+      backgroundHighlight="true"
+      title="Next Week"
+      (click)="onDateOptionClicked('nw')"
+      >view_week</app-icon-button
+    >
 
-    <app-icon-button backgroundHighlight="true">more_horiz</app-icon-button>
+    <app-icon-button
+      backgroundHighlight="true"
+      title="More date options"
+      (click)="onMoreDateOptionsClicked()"
+      >more_horiz</app-icon-button
+    >
   </div>
   <div class="section-header">
     Priority

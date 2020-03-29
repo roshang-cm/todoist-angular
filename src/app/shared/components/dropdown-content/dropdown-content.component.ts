@@ -3,8 +3,13 @@ import {
   OnInit,
   Renderer2,
   ElementRef,
-  OnDestroy
+  OnDestroy,
+  ContentChild,
+  ContentChildren,
+  QueryList,
+  AfterContentInit
 } from "@angular/core";
+import { DropdownService } from "src/app/services/dropdown.service";
 
 @Component({
   selector: "app-dropdown-content",
@@ -12,9 +17,31 @@ import {
   styleUrls: ["./dropdown-content.component.scss"]
 })
 export class DropdownContentComponent implements OnInit, OnDestroy {
+  constructor(
+    private dropdownService: DropdownService,
+    private selfRef: ElementRef,
+    private renderer: Renderer2
+  ) {
+    const activeDropdown = this.dropdownService.dropdownStatus;
+    activeDropdown.subscribe(id => {
+      if (id === this.dropdownId) {
+        this.isVisible = true;
+      } else {
+        this.isVisible = false;
+      }
+    });
+  }
   isVisible = false;
   listener = null;
+  dropdownId = "-1";
   toggleRef: ElementRef = null;
+
+  @ContentChildren("", { descendants: true })
+  children: QueryList<any>;
+
+  setDropdownId(id) {
+    this.dropdownId = id;
+  }
   setVisible(isVisible: boolean) {
     if (isVisible) {
       this.enableVisible();
@@ -29,10 +56,10 @@ export class DropdownContentComponent implements OnInit, OnDestroy {
   }
 
   enableVisible() {
-    this.isVisible = true;
+    this.dropdownService.openDropdown(this.dropdownId);
     this.listener = this.renderer.listen("window", "click", (e: Event) => {
       console.log("Still running");
-      console.log("The toggle ref is ", this.toggleRef);
+      console.log("The id is", this.dropdownId);
       const isToggleClicked = this.toggleRef.elementRef.nativeElement.contains(
         e.target
       );
@@ -44,17 +71,17 @@ export class DropdownContentComponent implements OnInit, OnDestroy {
   }
 
   disableVisible() {
-    this.isVisible = false;
+    this.dropdownService.closeDropdown();
     if (this.listener) {
       this.listener();
     }
   }
 
   ngOnDestroy() {
-    this.listener();
+    if (this.listener) {
+      this.listener();
+    }
   }
-
-  constructor(private selfRef: ElementRef, private renderer: Renderer2) {}
 
   ngOnInit(): void {}
 }

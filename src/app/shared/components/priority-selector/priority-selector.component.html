@@ -1,14 +1,34 @@
 <div class="actions">
-  <div class="white" [class.selected]="!task.priority">
+  <div
+    class="white"
+    [class.selected]="!task.priority"
+    (click)="setPriority(null)"
+    title="No priority"
+  >
     <i class="material-icons"> outlined_flag</i>
   </div>
-  <div class="blue" class.selected="task.priority === 1">
+  <div
+    class="blue"
+    [class.selected]="task.priority === 1"
+    (click)="setPriority(1)"
+    title="Priority level 1 (lowest)"
+  >
     <i class="material-icons"> flag</i>
   </div>
-  <div class="orange" class.selected="task.priority === 2">
+  <div
+    class="orange"
+    [class.selected]="task.priority === 2"
+    (click)="setPriority(2)"
+    title="Priority level 2 (medium)"
+  >
     <i class="material-icons"> flag</i>
   </div>
-  <div class="red" class.selected="task.priority === 3">
+  <div
+    class="red"
+    [class.selected]="task.priority === 3"
+    (click)="setPriority(3)"
+    title="Priority level 3 (highest)"
+  >
     <i class="material-icons">flag</i>
   </div>
 </div>

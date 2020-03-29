@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { Task } from "../../../models/task.model";
+import { DateService } from "src/app/services/date.service";
 
 @Component({
   selector: "app-task-list-tile",
@@ -20,7 +21,11 @@ export class TaskListTileComponent implements OnInit {
     this.isDragEnter = true;
   }
 
-  constructor() {}
+  get humanizedDate() {
+    return this.dateService.human(this.task);
+  }
+
+  constructor(private dateService: DateService) {}
 
   ngOnInit(): void {}
 }

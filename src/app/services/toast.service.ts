@@ -37,6 +37,9 @@ export class ToastService {
   get messages() {
     return this._messages;
   }
+  dismissToast(id) {
+    this._messages = this._messages.filter(toastInList => toastInList.id != id);
+  }
 
   show(toast: Toast) {
     toast.id = uuid4();

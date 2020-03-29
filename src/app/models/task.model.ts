@@ -1,11 +1,12 @@
 import * as moment from "moment";
 
 export class Task {
-  id: number;
+  id: string;
   title: string;
   project: number;
   label: number;
   dueDate: moment.Moment;
+  withTime: boolean;
   priority: number;
   section: number;
   parent: number;
@@ -13,11 +14,12 @@ export class Task {
   order: number;
 
   constructor(
-    id: number = null,
+    id: string = null,
     title: string = "",
     project: number = null,
     label: number = null,
     dueDate: moment.Moment = null,
+    withTime: boolean = false,
     priority: number = null,
     section: number = null,
     parent: number = null,
@@ -29,6 +31,7 @@ export class Task {
     this.project = project;
     this.label = label;
     this.dueDate = dueDate;
+    this.withTime = withTime;
     this.priority = priority;
     this.section = section;
     this.parent = parent;
@@ -42,7 +45,8 @@ export class Task {
       object.title,
       object.project,
       object.label,
-      moment(object.dueDate),
+      object.dueDate ? moment(object.dueDate) : null,
+      object.withTime,
       object.priority,
       object.section,
       object.parent,

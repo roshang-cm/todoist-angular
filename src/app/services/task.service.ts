@@ -81,7 +81,7 @@ export class TaskService {
     console.log("ADDED NEW TASK ==> ", task.id);
   }
 
-  updateTask(task: Task, noToast: boolean = false) {
+  updateTask(task: Task, noToast: boolean = false, whatChanged: string = null) {
     let index = -1;
     this._tasks.forEach((taskInList, indexOfTask) => {
       if (taskInList.id === task.id) {
@@ -104,7 +104,7 @@ export class TaskService {
     this.toastService.show({
       previousTask,
       task,
-      message: "Task updated",
+      message: whatChanged ? whatChanged : "Task updated",
       actions: [
         {
           name: "Undo",

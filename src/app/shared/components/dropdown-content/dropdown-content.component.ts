@@ -10,7 +10,6 @@ import {
   AfterContentInit
 } from "@angular/core";
 import { DropdownService } from "src/app/services/dropdown.service";
-import { copyFile } from "fs";
 
 @Component({
   selector: "app-dropdown-content",

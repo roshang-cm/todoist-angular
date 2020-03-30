@@ -6,13 +6,20 @@ import { v4 as uuid4 } from "uuid";
   providedIn: "root"
 })
 export class DropdownService {
-  activeDropdown$ = new Subject<string>();
+  activeDropdown$ = new Subject<string[]>();
+  private activeDropdowns: string[] = [];
+
+  emitValue(dropdowns: string[]) {
+    console.log("Changed dropdown", dropdowns);
+    this.activeDropdowns = dropdowns;
+    this.activeDropdown$.next(this.activeDropdowns);
+  }
   constructor() {
-    this.activeDropdown$.next(null);
+    this.emitValue([]);
   }
 
   closeDropdown() {
-    this.activeDropdown$.next(null);
+    this.emitValue([]);
   }
 
   openDropdown(id?: string) {
@@ -20,7 +27,9 @@ export class DropdownService {
       id = uuid4();
     }
     console.log("The dropdown is now", id);
-    this.activeDropdown$.next(id);
+    const dropdowns = this.activeDropdowns;
+    dropdowns.push(id);
+    this.emitValue(dropdowns);
     return id;
   }
 

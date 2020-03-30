@@ -10,27 +10,19 @@ import {
   AfterContentInit
 } from "@angular/core";
 import { DropdownService } from "src/app/services/dropdown.service";
+import { copyFile } from "fs";
 
 @Component({
   selector: "app-dropdown-content",
   templateUrl: "./dropdown-content.component.html",
   styleUrls: ["./dropdown-content.component.scss"]
 })
-export class DropdownContentComponent implements OnInit, OnDestroy {
+export class DropdownContentComponent implements OnInit, AfterContentInit {
   constructor(
     private dropdownService: DropdownService,
     private selfRef: ElementRef,
     private renderer: Renderer2
-  ) {
-    const activeDropdown = this.dropdownService.dropdownStatus;
-    activeDropdown.subscribe(id => {
-      if (id === this.dropdownId) {
-        this.isVisible = true;
-      } else {
-        this.isVisible = false;
-      }
-    });
-  }
+  ) {}
   isVisible = false;
   listener = null;
   dropdownId = "-1";
@@ -42,45 +34,48 @@ export class DropdownContentComponent implements OnInit, OnDestroy {
   setDropdownId(id) {
     this.dropdownId = id;
   }
-  setVisible(isVisible: boolean) {
-    if (isVisible) {
-      this.enableVisible();
-    } else {
-      this.disableVisible();
-    }
-  }
 
   setToggleRef(toggleRef: ElementRef) {
     console.log("The toggle ref is set");
     this.toggleRef = toggleRef;
   }
 
-  enableVisible() {
-    this.dropdownService.openDropdown(this.dropdownId);
-    this.listener = this.renderer.listen("window", "click", (e: Event) => {
-      console.log("Still running");
-      console.log("The id is", this.dropdownId);
-      const isToggleClicked = (this
-        .toggleRef as any).elementRef.nativeElement.contains(e.target);
-      console.log("Is toggle clicked ", isToggleClicked);
-      if (!this.selfRef.nativeElement.contains(e.target) && !isToggleClicked) {
-        this.disableVisible();
+  ngOnInit(): void {}
+
+  ngAfterContentInit() {
+    const activeDropdown = this.dropdownService.dropdownStatus;
+    activeDropdown.subscribe();
+    activeDropdown.forEach(idList => {
+      if (idList.length === 0) {
+        this.isVisible = false;
+        if (this.listener) {
+          this.listener();
+        }
       }
+      idList.forEach(id => {
+        if (this.dropdownId === id) {
+          this.isVisible = true;
+          this.listener = this.renderer.listen(
+            "window",
+            "click",
+            (e: Event) => {
+              const isToggleClicked = (this
+                .toggleRef as any).elementRef.nativeElement.contains(e.target);
+              if (
+                !this.selfRef.nativeElement.contains(e.target) &&
+                !isToggleClicked
+              ) {
+                this.dropdownService.closeDropdown();
+              }
+            }
+          );
+        } else {
+          this.isVisible = false;
+          if (this.listener) {
+            this.listener();
+          }
+        }
+      });
     });
   }
-
-  disableVisible() {
-    this.dropdownService.closeDropdown();
-    if (this.listener) {
-      this.listener();
-    }
-  }
-
-  ngOnDestroy() {
-    if (this.listener) {
-      this.listener();
-    }
-  }
-
-  ngOnInit(): void {}
 }

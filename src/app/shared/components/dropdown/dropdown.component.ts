@@ -11,6 +11,7 @@ import {
 import { DropdownToggleComponent } from "../dropdown-toggle/dropdown-toggle.component";
 import { DropdownContentComponent } from "../dropdown-content/dropdown-content.component";
 import { DropdownService } from "src/app/services/dropdown.service";
+import { v4 as uuid4 } from "uuid";
 
 @Component({
   selector: "app-dropdown",
@@ -34,12 +35,9 @@ export class DropdownComponent implements OnInit, AfterContentInit {
 
   ngAfterContentInit() {
     console.log(this.dropdownToggleComponentRef);
-    const dropdownId = this.dropdownService.openDropdown();
+    const dropdownId = uuid4();
     this.dropdownContentComponent.setDropdownId(dropdownId);
+    this.dropdownToggleComponent.setDropdownId(dropdownId);
     this.dropdownContentComponent.setToggleRef(this.dropdownToggleComponentRef);
-    this.dropdownToggleComponent.setOnClickedAction(() => {
-      this.isVisible = !this.isVisible;
-      this.dropdownContentComponent.setVisible(this.isVisible);
-    });
   }
 }

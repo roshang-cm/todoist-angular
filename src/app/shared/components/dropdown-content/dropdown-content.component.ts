@@ -45,6 +45,12 @@ export class DropdownContentComponent implements OnInit, AfterContentInit {
     const activeDropdown = this.dropdownService.dropdownStatus;
     activeDropdown.subscribe();
     activeDropdown.forEach(idList => {
+      if (idList.length === 0) {
+        this.isVisible = false;
+        if (this.listener) {
+          this.listener();
+        }
+      }
       idList.forEach(id => {
         if (this.dropdownId === id) {
           this.isVisible = true;
@@ -63,12 +69,13 @@ export class DropdownContentComponent implements OnInit, AfterContentInit {
             }
           );
           return;
+        } else {
+          this.isVisible = false;
+          if (this.listener) {
+            this.listener();
+          }
         }
       });
-      this.isVisible = false;
-      if (this.listener) {
-        this.listener();
-      }
     });
   }
 }

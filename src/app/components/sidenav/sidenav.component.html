@@ -1,22 +1,43 @@
 <nav>
   <app-side-nav-item
-    title="He"
-    icon="face"
+    title="Inbox"
+    icon="mail_outline"
     count="2"
     iconColor="info"
+    [routerLink]="['/inbox']"
+    #routerActive="routerLinkActive"
+    routerLinkActive="router-link-active"
+    [selected]="routerActive.isActive"
   ></app-side-nav-item>
   <app-side-nav-item
-    title="He"
-    icon="face"
+    title="Today"
+    icon="today"
     count="2"
     iconColor="info"
-    selected
+    [routerLink]="['/date/today']"
+    #routerActive2="routerLinkActive"
+    routerLinkActive="router-link-active"
+    [selected]="routerActive2.isActive"
   ></app-side-nav-item>
   <app-side-nav-item
-    title="He"
-    icon="face"
+    title="Tomorrow"
+    icon="arrow_right_alt"
     count="2"
     iconColor="info"
+    [routerLink]="['/date/tomorrow']"
+    #routerActive3="routerLinkActive"
+    routerLinkActive="router-link-active"
+    [selected]="routerActive3.isActive"
+  ></app-side-nav-item>
+  <app-side-nav-item
+    title="Next Week"
+    icon="view_week"
+    count="2"
+    iconColor="info"
+    [routerLink]="['/date/nextweek']"
+    #routerActive4="routerLinkActive"
+    routerLinkActive="router-link-active"
+    [selected]="routerActive4.isActive"
   ></app-side-nav-item>
   <app-collapsible-side-nav-item>
     <app-side-nav-item></app-side-nav-item>

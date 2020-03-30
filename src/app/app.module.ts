@@ -1,7 +1,7 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
-
+import { RouterModule, Routes } from "@angular/router";
 import { AppComponent } from "./app.component";
 import { HomeComponent } from "./pages/home/home.component";
 import { HeaderComponent } from "./components/header/header.component";
@@ -20,13 +20,15 @@ import { IconButtonComponent } from "./shared/icon-button/icon-button.component"
 import { ToastComponent } from "./shared/components/toast/toast.component";
 import { ToastHolderComponent } from "./shared/components/toast-holder/toast-holder.component";
 import { AuthInterceptorInterceptor } from "./interceptors/auth-interceptor.interceptor";
-import { DropdownComponent } from './shared/components/dropdown/dropdown.component';
-import { DropdownToggleComponent } from './shared/components/dropdown-toggle/dropdown-toggle.component';
-import { DropdownContentComponent } from './shared/components/dropdown-content/dropdown-content.component';
-import { MenuItemComponent } from './shared/components/menu-item/menu-item.component';
-import { TaskContextualMenuComponent } from './shared/components/task-contextual-menu/task-contextual-menu.component';
-import { TaskContextualScheduleMenuComponent } from './shared/components/task-contextual-schedule-menu/task-contextual-schedule-menu.component';
-import { PrioritySelectorComponent } from './shared/components/priority-selector/priority-selector.component';
+import { DropdownComponent } from "./shared/components/dropdown/dropdown.component";
+import { DropdownToggleComponent } from "./shared/components/dropdown-toggle/dropdown-toggle.component";
+import { DropdownContentComponent } from "./shared/components/dropdown-content/dropdown-content.component";
+import { MenuItemComponent } from "./shared/components/menu-item/menu-item.component";
+import { TaskContextualMenuComponent } from "./shared/components/task-contextual-menu/task-contextual-menu.component";
+import { TaskContextualScheduleMenuComponent } from "./shared/components/task-contextual-schedule-menu/task-contextual-schedule-menu.component";
+import { PrioritySelectorComponent } from "./shared/components/priority-selector/priority-selector.component";
+import appRoutes from "./routes";
+import { TasksViewComponent } from './components/tasks-view/tasks-view.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,14 +51,16 @@ import { PrioritySelectorComponent } from './shared/components/priority-selector
     MenuItemComponent,
     TaskContextualMenuComponent,
     TaskContextualScheduleMenuComponent,
-    PrioritySelectorComponent
+    PrioritySelectorComponent,
+    TasksViewComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
     DragDropModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forRoot(appRoutes, { enableTracing: true })
   ],
   providers: [
     {

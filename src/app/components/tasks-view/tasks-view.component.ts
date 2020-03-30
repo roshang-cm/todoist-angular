@@ -89,6 +89,7 @@ export class TasksViewComponent implements OnInit {
       case "today":
         this.title = "Today";
         this.taskFilter = (task: Task) => {
+          if (!task.dueDate) return false;
           return task.dueDate.isSame(moment().startOf("day"), "day");
         };
 
@@ -96,6 +97,7 @@ export class TasksViewComponent implements OnInit {
       case "tomorrow":
         this.title = "Tomorrow";
         this.taskFilter = (task: Task) => {
+          if (!task.dueDate) return false;
           return task.dueDate.isSame(
             moment()
               .startOf("day")
@@ -108,6 +110,7 @@ export class TasksViewComponent implements OnInit {
       case "nextweek":
         this.title = "Next Week";
         this.taskFilter = (task: Task) => {
+          if (!task.dueDate) return false;
           return task.dueDate.isBetween(
             moment().startOf("day"),
             moment()

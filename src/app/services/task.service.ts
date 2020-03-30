@@ -3,11 +3,15 @@ import { Task } from "../models/task.model";
 import { v4 as uuid4 } from "uuid";
 import { TaskHttpService } from "./task-http.service";
 import { ToastService, Toast } from "./toast.service";
+import { Moment } from "moment";
+import * as moment from "moment";
 
 export interface SyncAction {
   id: number | string;
   task: Task;
   action: "ADD_TASK" | "UPDATE_TASK" | "DELETE_TASK" | "REORDER_TASK";
+  time: moment.Moment | Date;
+  type: "task" | "project" | "filter";
 }
 
 @Injectable({
@@ -28,7 +32,9 @@ export class TaskService {
     this._syncActions.push({
       id: uuid4(),
       task,
-      action
+      action,
+      time: moment(),
+      type: "task"
     });
   }
 

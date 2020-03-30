@@ -14,7 +14,13 @@ import {
 } from "src/app/services/toast.service";
 import { TaskHttpService } from "src/app/services/task-http.service";
 import { AuthServiceService } from "src/app/services/auth-service.service";
-import { ActivatedRoute, Router } from "@angular/router";
+import {
+  ActivatedRoute,
+  Router,
+  ActivatedRouteSnapshot
+} from "@angular/router";
+import * as moment from "moment";
+import { Observable, combineLatest } from "rxjs";
 
 export interface TaskListComponentType {
   type: "task" | "open_add_task" | "closed_add_task";
@@ -28,6 +34,9 @@ export interface TaskListComponentType {
 export class TasksViewComponent implements OnInit {
   isAddTaskVisible = false;
   componentList = [];
+  title = "";
+  subtitle = "";
+  taskFilter: (task: Task) => boolean = () => true;
   setAddTaskVisible(newSetting: boolean) {
     this.isAddTaskVisible = newSetting;
   }
@@ -36,7 +45,7 @@ export class TasksViewComponent implements OnInit {
     this.taskService.addTask(task);
   }
   getTasks() {
-    return this.taskService.tasks;
+    return this.taskService.tasks.filter(this.taskFilter);
   }
 
   onCheckChanged(task: Task) {
@@ -55,11 +64,67 @@ export class TasksViewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.data.forEach(data => {
-      console.log(data);
-      alert(data.type);
+    this.route.paramMap.subscribe(map => {
+      const route = this.route.snapshot;
+      switch (route.data.type) {
+        case "inbox":
+          this.title = "Inbox";
+          this.taskFilter = (task: Task) => {
+            return !task.project;
+          };
+          break;
+        case "date":
+          this.resolveContextByDate(route);
+          break;
+        case "project":
+          this.resolveContextByProject(route);
+          break;
+      }
     });
   }
+
+  resolveContextByDate(route: ActivatedRouteSnapshot) {
+    const type = route.paramMap.get("type");
+    switch (type) {
+      case "today":
+        this.title = "Today";
+        this.taskFilter = (task: Task) => {
+          return task.dueDate.isSame(moment().startOf("day"), "day");
+        };
+
+        break;
+      case "tomorrow":
+        this.title = "Tomorrow";
+        this.taskFilter = (task: Task) => {
+          return task.dueDate.isSame(
+            moment()
+              .startOf("day")
+              .add(1, "day"),
+            "day"
+          );
+        };
+
+        break;
+      case "nextweek":
+        this.title = "Next Week";
+        this.taskFilter = (task: Task) => {
+          return task.dueDate.isBetween(
+            moment().startOf("day"),
+            moment()
+              .startOf("day")
+              .add(8, "days"),
+            "day"
+          );
+        };
+
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  resolveContextByProject(route: ActivatedRouteSnapshot) {}
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer !== event.container) {

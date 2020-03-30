@@ -1,5 +1,5 @@
 <main>
-  <app-page-title></app-page-title>
+  <app-page-title [title]="title" [subtitle]="subtitle"></app-page-title>
   <div class="list-container" cdkDropList (cdkDropListDropped)="drop($event)">
     <app-task-list-tile
       (checkChanged)="onCheckChanged($event)"

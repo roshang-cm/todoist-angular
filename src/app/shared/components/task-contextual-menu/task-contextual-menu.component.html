@@ -29,6 +29,14 @@
       (click)="onDateOptionClicked('nw')"
       >view_week</app-icon-button
     >
+    <app-dropdown>
+      <app-dropdown-toggle>
+        <app-icon-button>face</app-icon-button>
+      </app-dropdown-toggle>
+      <app-dropdown-content>
+        <app-task-contextual-schedule-menu></app-task-contextual-schedule-menu>
+      </app-dropdown-content>
+    </app-dropdown>
   </div>
   <div class="section-header">
     Priority

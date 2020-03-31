@@ -7,7 +7,12 @@ import { Component, OnInit, Input } from "@angular/core";
 })
 export class CollapsibleSideNavItemComponent implements OnInit {
   @Input() expanded = false;
-
+  @Input() title = "";
+  @Input() action: {
+    tooltipText: string;
+    icon: string;
+    callback: () => any;
+  } = null;
   toggleExpanded() {
     this.expanded = !this.expanded;
   }

@@ -3,9 +3,9 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment";
 import { AuthServiceService } from "./auth-service.service";
 import { buildCompleteUrl } from "../shared/utils";
-import { SyncAction } from "./task.service";
 import { Task } from "../models/task.model";
 import { tap } from "rxjs/operators";
+import { SyncAction } from "./sync-actions.service";
 @Injectable({
   providedIn: "root"
 })

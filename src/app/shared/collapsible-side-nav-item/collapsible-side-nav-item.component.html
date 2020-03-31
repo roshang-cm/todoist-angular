@@ -3,12 +3,15 @@
     >arrow_right</app-icon-button
   >
   <div class="title-section clickable" (click)="toggleExpanded()">
-    <h3>Hello</h3>
+    <h3>{{ title }}</h3>
   </div>
   <div class="spacer clickable" (click)="toggleExpanded()"></div>
-  <div class="menu">
-    <i class="material-icons">add</i>
-  </div>
+  <app-icon-button
+    [title]="action.tooltipText"
+    *ngIf="action"
+    (click)="action.callback()"
+    >{{ action.icon }}</app-icon-button
+  >
 </div>
 
 <div [ngClass]="'collapsible' + ' ' + (expanded ? 'visible' : '')">

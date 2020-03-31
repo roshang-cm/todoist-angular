@@ -1,5 +1,6 @@
 <div class="main {{ selected ? 'selected' : '' }}">
-  <app-icon-button [color]="iconColor">{{ icon }}</app-icon-button>
+  <div class="dot" *ngIf="dot" [style.backgroundColor]="dotColor"></div>
+  <app-icon-button *ngIf="!dot" [color]="iconColor">{{ icon }}</app-icon-button>
   <div class="title-section">
     <h3>{{ title }}</h3>
     <h4>{{ count }}</h4>

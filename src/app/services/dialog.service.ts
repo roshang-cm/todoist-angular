@@ -12,12 +12,25 @@ import { DialogContext, DialogOverlayRef } from "./dialogref";
 export class DialogService {
   constructor(private overlay: Overlay, private injector: Injector) {}
 
-  open(content: Type<any> | any, data: DialogContext | any): DialogOverlayRef {
-    alert("called");
-    const configs = new OverlayConfig({
+  open(
+    content: Type<any> | any,
+    data: DialogContext | any,
+    overlayConfig: OverlayConfig = {}
+  ): DialogOverlayRef {
+    const defaultConfig = {
       hasBackdrop: true,
       panelClass: ["modal", "is-active"],
-      backdropClass: "modal-background"
+      backdropClass: "modal-background",
+
+      positionStrategy: this.overlay
+        .position()
+        .global()
+        .centerHorizontally()
+        .centerVertically()
+    };
+    const configs = new OverlayConfig({
+      ...defaultConfig,
+      ...overlayConfig
     });
 
     const overlayRef = this.overlay.create(configs);

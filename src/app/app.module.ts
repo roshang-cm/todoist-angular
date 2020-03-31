@@ -32,6 +32,7 @@ import { TasksViewComponent } from "./components/tasks-view/tasks-view.component
 import { NewProjectDialogComponent } from "./shared/components/new-project-dialog/new-project-dialog.component";
 import { DialogComponent } from "./shared/components/dialog/dialog.component";
 import { OverlayModule } from "@angular/cdk/overlay";
+import { DialogPanelUiComponent } from './shared/components/dialog-panel-ui/dialog-panel-ui.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +58,8 @@ import { OverlayModule } from "@angular/cdk/overlay";
     PrioritySelectorComponent,
     TasksViewComponent,
     NewProjectDialogComponent,
-    DialogComponent
+    DialogComponent,
+    DialogPanelUiComponent
   ],
   imports: [
     BrowserModule,

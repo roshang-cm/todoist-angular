@@ -8,6 +8,8 @@ import { Component, OnInit, Input } from "@angular/core";
 export class SideNavItemComponent implements OnInit {
   constructor() {}
   @Input() icon: string;
+  @Input() dot: boolean = false;
+  @Input() dotColor: string = "#000";
   @Input() iconColor:
     | "default"
     | "info"

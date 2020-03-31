@@ -41,3 +41,12 @@ h4 {
   font-size: 0.7em;
   font-weight: 400;
 }
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: black;
+  display: inline-block;
+  margin-right: 4px;
+}

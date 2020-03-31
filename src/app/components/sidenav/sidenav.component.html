@@ -39,8 +39,17 @@
     routerLinkActive="router-link-active"
     [selected]="routerActive4.isActive"
   ></app-side-nav-item>
-  <app-collapsible-side-nav-item>
-    <app-side-nav-item></app-side-nav-item>
-    <app-side-nav-item></app-side-nav-item>
+  <hr />
+  <app-collapsible-side-nav-item
+    [expanded]="true"
+    title="Projects"
+    [action]="projectAction"
+  >
+    <app-side-nav-item
+      *ngFor="let project of projectList"
+      [dot]="true"
+      [dotColor]="project.color"
+      [title]="project.name"
+    ></app-side-nav-item>
   </app-collapsible-side-nav-item>
 </nav>

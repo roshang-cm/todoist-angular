@@ -5,21 +5,13 @@ import { TaskHttpService } from "./task-http.service";
 import { ToastService, Toast } from "./toast.service";
 import { Moment } from "moment";
 import * as moment from "moment";
-
-export interface SyncAction {
-  id: number | string;
-  task: Task;
-  action: "ADD_TASK" | "UPDATE_TASK" | "DELETE_TASK" | "REORDER_TASK";
-  time: moment.Moment | Date;
-  type: "task" | "project" | "filter";
-}
+import { SyncAction, SyncActionsService } from "./sync-actions.service";
 
 @Injectable({
   providedIn: "root"
 })
 export class TaskService {
   private _tasks: Task[] = [];
-  private _syncActions: SyncAction[] = [];
 
   get tasks(): Task[] {
     return this._tasks;
@@ -29,7 +21,7 @@ export class TaskService {
     task: SyncAction["task"],
     action: SyncAction["action"]
   ) {
-    this._syncActions.push({
+    this._syncActions.append({
       id: uuid4(),
       task,
       action,
@@ -40,10 +32,9 @@ export class TaskService {
 
   private updateCache() {
     const data = JSON.stringify({
-      tasks: this._tasks,
-      syncActions: this._syncActions
+      tasks: this._tasks
     });
-    localStorage.setItem("cache", data);
+    localStorage.setItem("taskCache", data);
   }
 
   private sync() {
@@ -59,7 +50,7 @@ export class TaskService {
   }
 
   private readFromCache() {
-    const data = JSON.parse(localStorage.getItem("cache"));
+    const data = JSON.parse(localStorage.getItem("taskCache"));
     let tasks = [];
     let syncActions = [];
     if (data) {
@@ -67,16 +58,10 @@ export class TaskService {
       tasks = tasks.map(task => {
         return Task.fromJson(task);
       });
-      syncActions = data.syncActions;
     }
     return {
-      tasks,
-      syncActions
+      tasks
     };
-  }
-
-  onSyncActionComplete(syncAction: SyncAction) {
-    this._syncActions = this._syncActions.filter(sa => sa.id !== syncAction.id);
   }
 
   addTask(task: Task) {
@@ -125,10 +110,10 @@ export class TaskService {
 
   constructor(
     private taskHttpService: TaskHttpService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private _syncActions: SyncActionsService
   ) {
     const cachedData = this.readFromCache();
     this._tasks = cachedData.tasks;
-    this._syncActions = cachedData.syncActions;
   }
 }

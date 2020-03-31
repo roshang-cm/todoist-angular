@@ -21,6 +21,9 @@ import {
 } from "@angular/router";
 import * as moment from "moment";
 import { Observable, combineLatest } from "rxjs";
+import { NewProjectDialogComponent } from "src/app/shared/components/new-project-dialog/new-project-dialog.component";
+import { DialogOverlayRef } from "src/app/services/dialogref";
+import { DialogService } from "src/app/services/dialog.service";
 
 export interface TaskListComponentType {
   type: "task" | "open_add_task" | "closed_add_task";
@@ -43,6 +46,7 @@ export class TasksViewComponent implements OnInit {
 
   addTask(task: Task) {
     this.taskService.addTask(task);
+    this.dialogService.open(NewProjectDialogComponent, null);
   }
   getTasks() {
     return this.taskService.tasks.filter(this.taskFilter);
@@ -60,7 +64,8 @@ export class TasksViewComponent implements OnInit {
     private taskService: TaskService,
     private toastService: ToastService,
     private httpService: TaskHttpService,
-    private authService: AuthServiceService
+    private authService: AuthServiceService,
+    private dialogService: DialogService
   ) {}
 
   ngOnInit(): void {

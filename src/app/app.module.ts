@@ -28,7 +28,10 @@ import { TaskContextualMenuComponent } from "./shared/components/task-contextual
 import { TaskContextualScheduleMenuComponent } from "./shared/components/task-contextual-schedule-menu/task-contextual-schedule-menu.component";
 import { PrioritySelectorComponent } from "./shared/components/priority-selector/priority-selector.component";
 import appRoutes from "./routes";
-import { TasksViewComponent } from './components/tasks-view/tasks-view.component';
+import { TasksViewComponent } from "./components/tasks-view/tasks-view.component";
+import { NewProjectDialogComponent } from "./shared/components/new-project-dialog/new-project-dialog.component";
+import { DialogComponent } from "./shared/components/dialog/dialog.component";
+import { OverlayModule } from "@angular/cdk/overlay";
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,7 +55,9 @@ import { TasksViewComponent } from './components/tasks-view/tasks-view.component
     TaskContextualMenuComponent,
     TaskContextualScheduleMenuComponent,
     PrioritySelectorComponent,
-    TasksViewComponent
+    TasksViewComponent,
+    NewProjectDialogComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -60,6 +65,7 @@ import { TasksViewComponent } from './components/tasks-view/tasks-view.component
     BrowserAnimationsModule,
     DragDropModule,
     FormsModule,
+    OverlayModule,
     RouterModule.forRoot(appRoutes, { enableTracing: true })
   ],
   providers: [
@@ -69,6 +75,7 @@ import { TasksViewComponent } from './components/tasks-view/tasks-view.component
       multi: true
     }
   ],
+  entryComponents: [DialogComponent, NewProjectDialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

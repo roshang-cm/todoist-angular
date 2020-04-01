@@ -30,7 +30,7 @@
     border-radius: 50%;
     border: 2px solid rgb(221, 221, 221);
     height: 18px;
-    width: 18px;
+    width: 20px;
     margin: 0px 10px;
     display: flex;
     justify-content: center;
@@ -136,4 +136,28 @@ hr {
 
 .droptarget {
   height: 50px;
+}
+
+.col {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.top {
+  display: flex;
+}
+
+.row {
+  display: flex;
+}
+
+.dot {
+  background-color: black;
+  width: 10px;
+  height: 10px;
+  color: black;
+  display: inline-block;
+  border-radius: 50%;
 }

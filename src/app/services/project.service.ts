@@ -37,6 +37,16 @@ export class ProjectService {
     return [];
   }
 
+  getProjectById(uuid: string) {
+    const project = this._projects.filter(_project => {
+      return uuid === _project.id;
+    });
+    if (project.length === 1) {
+      return project[0];
+    }
+    return null;
+  }
+
   addProject(name: string, color: string) {
     const newProject = {
       color,

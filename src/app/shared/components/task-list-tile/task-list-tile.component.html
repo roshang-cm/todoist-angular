@@ -16,24 +16,43 @@
     >
       <i class="material-icons">done</i>
     </div>
-    <div class="title-section">
-      <h1>{{ task.title }}</h1>
-      <h2 *ngIf="task.dueDate">
-        {{ humanizedDate }}
-      </h2>
+    <div class="col">
+      <div class="row">
+        <div class="title-section">
+          <h1>{{ task.title }}</h1>
+        </div>
+        <div class="spacer"></div>
+        <div class="actions">
+          <app-icon-button backgroundHighlight="true"
+            >event_note</app-icon-button
+          >
+        </div>
+        <app-dropdown>
+          <app-dropdown-toggle>
+            <app-icon-button backgroundHighlight="true"
+              >more_horiz</app-icon-button
+            >
+          </app-dropdown-toggle>
+          <app-dropdown-content>
+            <app-task-contextual-menu [task]="task"></app-task-contextual-menu>
+          </app-dropdown-content>
+        </app-dropdown>
+      </div>
+      <div class="row">
+        <div class="title-section">
+          <h2 *ngIf="task.dueDate">
+            {{ humanizedDate }}
+          </h2>
+        </div>
+        <div class="spacer"></div>
+        <div class="title-section" *ngIf="taskProject">
+          <h2 [style.backgroundColor]="taskProject.color">
+            <span class="dot"></span>
+            {{ taskProject.name }}
+          </h2>
+        </div>
+      </div>
     </div>
-    <div class="spacer"></div>
-    <div class="actions">
-      <app-icon-button backgroundHighlight="true">event_note</app-icon-button>
-    </div>
-    <app-dropdown>
-      <app-dropdown-toggle>
-        <app-icon-button backgroundHighlight="true">more_horiz</app-icon-button>
-      </app-dropdown-toggle>
-      <app-dropdown-content>
-        <app-task-contextual-menu [task]="task"></app-task-contextual-menu>
-      </app-dropdown-content>
-    </app-dropdown>
   </div>
   <!-- <div
     class="droptarget"

@@ -3,7 +3,7 @@ import * as moment from "moment";
 export class Task {
   id: string;
   title: string;
-  project: number;
+  project: string;
   label: number;
   dueDate: moment.Moment;
   withTime: boolean;
@@ -16,7 +16,7 @@ export class Task {
   constructor(
     id: string = null,
     title: string = "",
-    project: number = null,
+    project: string = null,
     label: number = null,
     dueDate: moment.Moment = null,
     withTime: boolean = false,

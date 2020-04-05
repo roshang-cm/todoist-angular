@@ -4,9 +4,9 @@ import { Type } from "@angular/core";
 import { Subject } from "rxjs";
 
 export interface DialogContext {
-  contextType: "task" | "project" | "filter" | string;
+  contextType: "task" | "project" | "filter";
   contextData: Task | any | null;
-  otherData: any;
+  otherData?: any;
 }
 
 export interface OverlayCloseEvent {

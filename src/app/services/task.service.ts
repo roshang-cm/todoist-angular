@@ -8,7 +8,7 @@ import * as moment from "moment";
 import { SyncAction, SyncActionsService } from "./sync-actions.service";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class TaskService {
   private _tasks: Task[] = [];
@@ -26,13 +26,13 @@ export class TaskService {
       task,
       action,
       time: moment(),
-      type: "task"
+      type: "task",
     });
   }
 
   private updateCache() {
     const data = JSON.stringify({
-      tasks: this._tasks
+      tasks: this._tasks,
     });
     localStorage.setItem("taskCache", data);
   }
@@ -55,12 +55,12 @@ export class TaskService {
     let syncActions = [];
     if (data) {
       tasks = data.tasks;
-      tasks = tasks.map(task => {
+      tasks = tasks.map((task) => {
         return Task.fromJson(task);
       });
     }
     return {
-      tasks
+      tasks,
     };
   }
 
@@ -73,6 +73,8 @@ export class TaskService {
   }
 
   updateTask(task: Task, noToast: boolean = false, whatChanged: string = null) {
+    task = Task.fromJson(task);
+    console.log("Update task was called!");
     let index = -1;
     this._tasks.forEach((taskInList, indexOfTask) => {
       if (taskInList.id === task.id) {
@@ -102,10 +104,14 @@ export class TaskService {
           type: "primary",
           callback: (toast: Toast) => {
             this.updateTask(toast.previousTask, true);
-          }
-        }
-      ]
+          },
+        },
+      ],
     });
+  }
+
+  getCountByFilter(filter: (task: Task) => boolean) {
+    return this._tasks.filter(filter).length;
   }
 
   constructor(

@@ -13,7 +13,7 @@ export interface Project {
   color: string;
 }
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class ProjectService {
   constructor(private syncActionService: SyncActionsService) {
@@ -38,7 +38,7 @@ export class ProjectService {
   }
 
   getProjectById(uuid: string) {
-    const project = this._projects.filter(_project => {
+    const project = this._projects.filter((_project) => {
       return uuid === _project.id;
     });
     if (project.length === 1) {
@@ -47,11 +47,17 @@ export class ProjectService {
     return null;
   }
 
+  search(query: string): Project[] {
+    return this._projects.filter((project: Project) => {
+      return project.name.includes(query);
+    });
+  }
+
   addProject(name: string, color: string) {
     const newProject = {
       color,
       name,
-      id: uuid4()
+      id: uuid4(),
     };
     this._projects.push(newProject);
     this.updateCache();
@@ -67,7 +73,7 @@ export class ProjectService {
       project,
       action,
       time: moment(),
-      type: "project"
+      type: "project",
     });
   }
 }

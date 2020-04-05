@@ -29,23 +29,18 @@
       (click)="onDateOptionClicked('nw')"
       >view_week</app-icon-button
     >
-    <app-dropdown>
-      <app-dropdown-toggle>
-        <app-icon-button>face</app-icon-button>
-      </app-dropdown-toggle>
-      <app-dropdown-content>
-        <app-task-contextual-schedule-menu></app-task-contextual-schedule-menu>
-      </app-dropdown-content>
-    </app-dropdown>
+    <app-icon-button (click)="showSchedulingPopover($event)"
+      >more_horiz</app-icon-button
+    >
   </div>
   <div class="section-header">
     Priority
   </div>
   <div style="margin-left: 16px;">
-    <app-priority-selector [task]="task"></app-priority-selector>
+    <app-priority-selector
+      [dialogRef]="sharedDialogRef"
+      [task]="task"
+    ></app-priority-selector>
   </div>
   <hr />
-  <app-menu-item icon="face">
-    Reminders
-  </app-menu-item>
 </div>

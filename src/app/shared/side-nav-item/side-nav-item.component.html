@@ -3,7 +3,7 @@
   <app-icon-button *ngIf="!dot" [color]="iconColor">{{ icon }}</app-icon-button>
   <div class="title-section">
     <h3>{{ title }}</h3>
-    <h4>{{ count }}</h4>
+    <h4 *ngIf="count">{{ count }}</h4>
   </div>
   <div class="spacer"></div>
   <!-- <div class="menu">

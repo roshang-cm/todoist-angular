@@ -1,17 +1,25 @@
 <div class="container">
-  <app-menu-item icon="arrow_upward">
-    Add task above
-  </app-menu-item>
-  <app-menu-item icon="arrow_downward"> Add task below </app-menu-item
-  ><app-menu-item icon="create">
-    Edit task
-  </app-menu-item>
-  <hr />
-  <div class="section-header">
-    Schedule
+  <div class="menu">
+    <app-menu-item icon="today" (click)="onDateOptionClicked('today')">
+      Today
+    </app-menu-item>
+    <app-menu-item
+      icon="arrow_right_alt"
+      (click)="onDateOptionClicked('tomorrow')"
+    >
+      Tomorrow </app-menu-item
+    ><app-menu-item icon="view_week" (click)="onDateOptionClicked('nextweek')">
+      Next Week
+    </app-menu-item>
+    <app-menu-item icon="cancel" (click)="updateTaskRemoveDueDate()">
+      No Due Date
+    </app-menu-item>
+    <hr />
+    <mat-calendar
+      [selected]="selectedDate"
+      (selectedChange)="onDateChanged($event)"
+    ></mat-calendar>
+    <hr />
+    <app-menu-item icon="add"> Add time </app-menu-item>
   </div>
-
-  <app-menu-item icon="face">
-    Reminders
-  </app-menu-item>
 </div>

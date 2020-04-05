@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, ElementRef } from "@angular/core";
 import {
   CdkDragDrop,
   transferArrayItem,
@@ -24,6 +24,7 @@ import { Observable, combineLatest } from "rxjs";
 import { NewProjectDialogComponent } from "src/app/shared/components/new-project-dialog/new-project-dialog.component";
 import { DialogOverlayRef } from "src/app/services/dialogref";
 import { DialogService } from "src/app/services/dialog.service";
+import { ProjectService, Project } from "src/app/services/project.service";
 
 export interface TaskListComponentType {
   type: "task" | "open_add_task" | "closed_add_task";
@@ -39,6 +40,7 @@ export class TasksViewComponent implements OnInit {
   componentList = [];
   title = "";
   subtitle = "";
+  activeProject: Project = null;
   taskFilter: (task: Task) => boolean = () => true;
   setAddTaskVisible(newSetting: boolean) {
     this.isAddTaskVisible = newSetting;
@@ -46,7 +48,7 @@ export class TasksViewComponent implements OnInit {
 
   addTask(task: Task) {
     this.taskService.addTask(task);
-    this.dialogService.open(NewProjectDialogComponent, null);
+    this.dialogService.openDialog(NewProjectDialogComponent, null);
   }
   getTasks() {
     return this.taskService.tasks.filter(this.taskFilter);
@@ -65,7 +67,8 @@ export class TasksViewComponent implements OnInit {
     private toastService: ToastService,
     private httpService: TaskHttpService,
     private authService: AuthServiceService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private projectService: ProjectService
   ) {}
 
   ngOnInit(): void {
@@ -87,7 +90,14 @@ export class TasksViewComponent implements OnInit {
       }
     });
   }
-
+  showPopover(origin: MouseEvent) {
+    this.dialogService.openPopover(
+      origin.target,
+      NewProjectDialogComponent,
+      null,
+      100
+    );
+  }
   resolveContextByDate(route: ActivatedRouteSnapshot) {
     const type = route.paramMap.get("type");
     switch (type) {
@@ -132,7 +142,18 @@ export class TasksViewComponent implements OnInit {
     }
   }
 
-  resolveContextByProject(route: ActivatedRouteSnapshot) {}
+  resolveContextByProject(route: ActivatedRouteSnapshot) {
+    const id = route.paramMap.get("id");
+    this.activeProject = this.projectService.getProjectById(id);
+    if (!this.activeProject) {
+      alert("This project does not exist");
+      return;
+    }
+    this.taskFilter = task => {
+      return task.project === this.activeProject.id;
+    };
+    this.title = this.activeProject.name;
+  }
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer !== event.container) {

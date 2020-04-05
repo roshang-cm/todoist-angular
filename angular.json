@@ -131,5 +131,8 @@
       }
     }
   },
-  "defaultProject": "todoist-angular"
+  "defaultProject": "todoist-angular",
+  "cli": {
+    "analytics": "2ea10045-4694-4ada-88ec-0459e68a029f"
+  }
 }

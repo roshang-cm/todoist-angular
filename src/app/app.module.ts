@@ -20,9 +20,6 @@ import { IconButtonComponent } from "./shared/icon-button/icon-button.component"
 import { ToastComponent } from "./shared/components/toast/toast.component";
 import { ToastHolderComponent } from "./shared/components/toast-holder/toast-holder.component";
 import { AuthInterceptorInterceptor } from "./interceptors/auth-interceptor.interceptor";
-import { DropdownComponent } from "./shared/components/dropdown/dropdown.component";
-import { DropdownToggleComponent } from "./shared/components/dropdown-toggle/dropdown-toggle.component";
-import { DropdownContentComponent } from "./shared/components/dropdown-content/dropdown-content.component";
 import { MenuItemComponent } from "./shared/components/menu-item/menu-item.component";
 import { TaskContextualMenuComponent } from "./shared/components/task-contextual-menu/task-contextual-menu.component";
 import { TaskContextualScheduleMenuComponent } from "./shared/components/task-contextual-schedule-menu/task-contextual-schedule-menu.component";
@@ -32,7 +29,10 @@ import { TasksViewComponent } from "./components/tasks-view/tasks-view.component
 import { NewProjectDialogComponent } from "./shared/components/new-project-dialog/new-project-dialog.component";
 import { DialogComponent } from "./shared/components/dialog/dialog.component";
 import { OverlayModule } from "@angular/cdk/overlay";
-import { DialogPanelUiComponent } from './shared/components/dialog-panel-ui/dialog-panel-ui.component';
+import { DialogPanelUiComponent } from "./shared/components/dialog-panel-ui/dialog-panel-ui.component";
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatMomentDateModule } from "@angular/material-moment-adapter";
+import { ProjectMenuComponent } from './shared/components/project-menu/project-menu.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,9 +49,6 @@ import { DialogPanelUiComponent } from './shared/components/dialog-panel-ui/dial
     IconButtonComponent,
     ToastComponent,
     ToastHolderComponent,
-    DropdownComponent,
-    DropdownToggleComponent,
-    DropdownContentComponent,
     MenuItemComponent,
     TaskContextualMenuComponent,
     TaskContextualScheduleMenuComponent,
@@ -59,7 +56,8 @@ import { DialogPanelUiComponent } from './shared/components/dialog-panel-ui/dial
     TasksViewComponent,
     NewProjectDialogComponent,
     DialogComponent,
-    DialogPanelUiComponent
+    DialogPanelUiComponent,
+    ProjectMenuComponent
   ],
   imports: [
     BrowserModule,
@@ -68,6 +66,8 @@ import { DialogPanelUiComponent } from './shared/components/dialog-panel-ui/dial
     DragDropModule,
     FormsModule,
     OverlayModule,
+    MatDatepickerModule,
+    MatMomentDateModule,
     RouterModule.forRoot(appRoutes, { enableTracing: true })
   ],
   providers: [

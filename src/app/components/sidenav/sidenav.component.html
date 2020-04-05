@@ -2,7 +2,7 @@
   <app-side-nav-item
     title="Inbox"
     icon="mail_outline"
-    count="2"
+    [count]="counts.inbox"
     iconColor="info"
     [routerLink]="['/inbox']"
     #routerActive="routerLinkActive"
@@ -12,7 +12,7 @@
   <app-side-nav-item
     title="Today"
     icon="today"
-    count="2"
+    [count]="counts.today"
     iconColor="info"
     [routerLink]="['/date/today']"
     #routerActive2="routerLinkActive"
@@ -22,7 +22,7 @@
   <app-side-nav-item
     title="Tomorrow"
     icon="arrow_right_alt"
-    count="2"
+    [count]="counts.tomorrow"
     iconColor="info"
     [routerLink]="['/date/tomorrow']"
     #routerActive3="routerLinkActive"
@@ -32,7 +32,7 @@
   <app-side-nav-item
     title="Next Week"
     icon="view_week"
-    count="2"
+    [count]="counts.nextWeek"
     iconColor="info"
     [routerLink]="['/date/nextweek']"
     #routerActive4="routerLinkActive"
@@ -46,10 +46,13 @@
     [action]="projectAction"
   >
     <app-side-nav-item
+      [routerLink]="['/project/' + project.id]"
       *ngFor="let project of projectList"
       [dot]="true"
       [dotColor]="project.color"
       [title]="project.name"
+      [count]="counts.byProject(project.id)"
+      [selected]="routeIncludes(project.id)"
     ></app-side-nav-item>
   </app-collapsible-side-nav-item>
 </nav>

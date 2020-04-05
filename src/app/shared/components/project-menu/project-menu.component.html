@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="section-header">
+    <span>Type a project name</span>
+    <div class="field">
+      <input type="text" [(ngModel)]="query" />
+      <app-icon-button *ngIf="query.length > 0">cancel</app-icon-button>
+    </div>
+  </div>
+  <hr />
+
+  <div class="results">
+    <div
+      class="project-item"
+      (click)="onProjectClicked(project)"
+      *ngFor="let project of projectSearchResults"
+    >
+      <div class="dot" [style.backgroundColor]="project.color"></div>
+      <h3>{{ project.name }}</h3>
+    </div>
+    <div
+      class="project-item"
+      *ngIf="query.length > 0 && projectSearchResults.length === 0"
+    >
+      <i class="material-icons">add</i>
+      <h3>Create new project named '{{ query }}'</h3>
+    </div>
+  </div>
+</div>

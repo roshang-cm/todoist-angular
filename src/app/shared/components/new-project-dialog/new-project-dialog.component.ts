@@ -6,7 +6,7 @@ import { ProjectService } from "src/app/services/project.service";
 @Component({
   selector: "app-new-project-dialog",
   templateUrl: "./new-project-dialog.component.html",
-  styleUrls: ["./new-project-dialog.component.scss"]
+  styleUrls: ["./new-project-dialog.component.scss"],
 })
 export class NewProjectDialogComponent implements OnInit {
   colorOptions = [
@@ -20,7 +20,7 @@ export class NewProjectDialogComponent implements OnInit {
     { color: "#ffcc00", name: "Gold" },
     { color: "#d000ff", name: "Violet" },
     { color: "#5700ba", name: "Indigo" },
-    { color: "#e3e2c8", name: "Silver" }
+    { color: "#e3e2c8", name: "Silver" },
   ];
 
   projectName = "";
@@ -30,7 +30,12 @@ export class NewProjectDialogComponent implements OnInit {
     private projectService: ProjectService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const data = this.dialogRef.data;
+    if (data.contextData) {
+      this.projectName = data.contextData;
+    }
+  }
 
   onCloseClicked() {
     this.dialogRef.close();

@@ -1,8 +1,10 @@
 import { Component, OnInit } from "@angular/core";
-import { DialogOverlayRef } from "src/app/services/dialogref";
+import { DialogOverlayRef, DialogContext } from "src/app/services/dialogref";
 import { TaskService } from "src/app/services/task.service";
 import { ProjectService, Project } from "src/app/services/project.service";
 import { Task } from "src/app/models/task.model";
+import { DialogService } from "src/app/services/dialog.service";
+import { NewProjectDialogComponent } from "../new-project-dialog/new-project-dialog.component";
 
 @Component({
   selector: "app-project-menu",
@@ -17,7 +19,8 @@ export class ProjectMenuComponent implements OnInit {
   constructor(
     private dialogRef: DialogOverlayRef,
     private taskService: TaskService,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private dialogService: DialogService
   ) {}
 
   get projectSearchResults(): Project[] {
@@ -38,6 +41,24 @@ export class ProjectMenuComponent implements OnInit {
     }
   }
 
+  onNewProjectClicked() {
+    const contextData: DialogContext = {
+      contextData: this.query,
+      contextType: "project",
+    };
+    const newProjectDialogRef = this.dialogService.openDialog(
+      NewProjectDialogComponent,
+      contextData
+    );
+  }
+
+  onNoProjectClicked() {
+    this.task.project = null;
+    if (this.shouldUpdate) {
+      this.taskService.updateTask(this.task, false, "Project removed");
+    }
+    this.dialogRef.close(null);
+  }
   onProjectClicked(project: Project) {
     this.task.project = project.id;
     if (this.shouldUpdate) {

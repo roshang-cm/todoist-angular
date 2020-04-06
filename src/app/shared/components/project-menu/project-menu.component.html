@@ -7,7 +7,7 @@
     </div>
   </div>
   <hr />
-  <div class="project-item">
+  <div (click)="onNoProjectClicked()" class="project-item">
     <h3>No Project</h3>
   </div>
   <hr />
@@ -21,6 +21,7 @@
       <h3>{{ project.name }}</h3>
     </div>
     <div
+      (click)="onNewProjectClicked()"
       class="project-item"
       *ngIf="query.length > 0 && projectSearchResults.length === 0"
     >

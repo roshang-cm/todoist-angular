@@ -2,7 +2,7 @@
   <app-side-nav-item
     title="Inbox"
     icon="mail_outline"
-    [count]="counts.inbox"
+    [count]="counts.inbox()"
     iconColor="info"
     [routerLink]="['/inbox']"
     #routerActive="routerLinkActive"
@@ -12,7 +12,7 @@
   <app-side-nav-item
     title="Today"
     icon="today"
-    [count]="counts.today"
+    [count]="counts.today()"
     iconColor="info"
     [routerLink]="['/date/today']"
     #routerActive2="routerLinkActive"
@@ -22,7 +22,7 @@
   <app-side-nav-item
     title="Tomorrow"
     icon="arrow_right_alt"
-    [count]="counts.tomorrow"
+    [count]="counts.tomorrow()"
     iconColor="info"
     [routerLink]="['/date/tomorrow']"
     #routerActive3="routerLinkActive"
@@ -32,7 +32,7 @@
   <app-side-nav-item
     title="Next Week"
     icon="view_week"
-    [count]="counts.nextWeek"
+    [count]="counts.nextWeek()"
     iconColor="info"
     [routerLink]="['/date/nextweek']"
     #routerActive4="routerLinkActive"

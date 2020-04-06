@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ElementRef } from "@angular/core";
 import {
   CdkDragDrop,
   transferArrayItem,
-  moveItemInArray
+  moveItemInArray,
 } from "@angular/cdk/drag-drop";
 import { Task } from "src/app/models/task.model";
 import { TaskService } from "src/app/services/task.service";
@@ -10,14 +10,14 @@ import {
   ToastService,
   ToastAction,
   Toast,
-  defaultUndoAction
+  defaultUndoAction,
 } from "src/app/services/toast.service";
 import { TaskHttpService } from "src/app/services/task-http.service";
 import { AuthServiceService } from "src/app/services/auth-service.service";
 import {
   ActivatedRoute,
   Router,
-  ActivatedRouteSnapshot
+  ActivatedRouteSnapshot,
 } from "@angular/router";
 import * as moment from "moment";
 import { Observable, combineLatest } from "rxjs";
@@ -25,15 +25,21 @@ import { NewProjectDialogComponent } from "src/app/shared/components/new-project
 import { DialogOverlayRef } from "src/app/services/dialogref";
 import { DialogService } from "src/app/services/dialog.service";
 import { ProjectService, Project } from "src/app/services/project.service";
+import { DateService } from "src/app/services/date.service";
 
 export interface TaskListComponentType {
   type: "task" | "open_add_task" | "closed_add_task";
   task: Task;
 }
+
+export interface TaskContext {
+  dueDate?: moment.Moment;
+  project?: string;
+}
 @Component({
   selector: "app-tasks-view",
   templateUrl: "./tasks-view.component.html",
-  styleUrls: ["./tasks-view.component.scss"]
+  styleUrls: ["./tasks-view.component.scss"],
 })
 export class TasksViewComponent implements OnInit {
   isAddTaskVisible = false;
@@ -41,14 +47,20 @@ export class TasksViewComponent implements OnInit {
   title = "";
   subtitle = "";
   activeProject: Project = null;
+  context: TaskContext = {};
   taskFilter: (task: Task) => boolean = () => true;
   setAddTaskVisible(newSetting: boolean) {
     this.isAddTaskVisible = newSetting;
   }
 
   addTask(task: Task) {
+    if (this.context.dueDate) {
+      task.dueDate = this.context.dueDate;
+    }
+    if (this.context.project) {
+      task.project = this.context.project;
+    }
     this.taskService.addTask(task);
-    this.dialogService.openDialog(NewProjectDialogComponent, null);
   }
   getTasks() {
     return this.taskService.tasks.filter(this.taskFilter);
@@ -68,11 +80,12 @@ export class TasksViewComponent implements OnInit {
     private httpService: TaskHttpService,
     private authService: AuthServiceService,
     private dialogService: DialogService,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private dateService: DateService
   ) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(map => {
+    this.route.paramMap.subscribe((map) => {
       const route = this.route.snapshot;
       switch (route.data.type) {
         case "inbox":
@@ -103,6 +116,7 @@ export class TasksViewComponent implements OnInit {
     switch (type) {
       case "today":
         this.title = "Today";
+        this.context.dueDate = this.dateService.today;
         this.taskFilter = (task: Task) => {
           if (!task.dueDate) return false;
           return task.dueDate.isSame(moment().startOf("day"), "day");
@@ -111,12 +125,11 @@ export class TasksViewComponent implements OnInit {
         break;
       case "tomorrow":
         this.title = "Tomorrow";
+        this.context.dueDate = this.dateService.tomorrow;
         this.taskFilter = (task: Task) => {
           if (!task.dueDate) return false;
           return task.dueDate.isSame(
-            moment()
-              .startOf("day")
-              .add(1, "day"),
+            moment().startOf("day").add(1, "day"),
             "day"
           );
         };
@@ -124,13 +137,12 @@ export class TasksViewComponent implements OnInit {
         break;
       case "nextweek":
         this.title = "Next Week";
+        this.context.dueDate = this.dateService.nextWeek;
         this.taskFilter = (task: Task) => {
           if (!task.dueDate) return false;
           return task.dueDate.isBetween(
             moment().startOf("day"),
-            moment()
-              .startOf("day")
-              .add(8, "days"),
+            moment().startOf("day").add(8, "days"),
             "day"
           );
         };
@@ -149,10 +161,11 @@ export class TasksViewComponent implements OnInit {
       alert("This project does not exist");
       return;
     }
-    this.taskFilter = task => {
+    this.taskFilter = (task) => {
       return task.project === this.activeProject.id;
     };
     this.title = this.activeProject.name;
+    this.context.project = this.activeProject.id;
   }
 
   drop(event: CdkDragDrop<string[]>) {

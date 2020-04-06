@@ -3,7 +3,7 @@ import * as moment from "moment";
 import { Task } from "../models/task.model";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class DateService {
   constructor() {}
@@ -43,14 +43,36 @@ export class DateService {
   }
 
   public get tomorrow() {
-    return moment()
-      .startOf("day")
-      .add(1, "day");
+    return moment().startOf("day").add(1, "day");
   }
 
   public get nextWeek() {
-    return moment()
-      .startOf("day")
-      .add(1, "week");
+    return moment().startOf("day").add(1, "week");
+  }
+
+  getReadableStrings(
+    date: moment.Moment | Date
+  ): {
+    fullDate: string;
+    shortDate: string;
+    fullDay: string;
+    shortDay: string;
+    time: string;
+    relativeTime: string;
+  } {
+    const theDate = moment(date);
+    return {
+      fullDate: theDate.format("DD-MM-YYYY"),
+      shortDate: theDate.format("DD MMM YY"),
+      fullDay: theDate.format("dddd"),
+      shortDay: theDate.format("ddd"),
+      time: theDate.format("HH: mm A"),
+      relativeTime: theDate.fromNow(),
+    };
+  }
+
+  shortDateFormat(date: moment.Moment | Date) {
+    const theDate = moment(date);
+    return theDate.format("DD MMM YY");
   }
 }

@@ -13,7 +13,9 @@
         [(ngModel)]="task.title"
         placeholder="Enter task"
       />
-      <input type="date" name="" id="" />
+      <button (click)="showSchedulePopover($event)">
+        {{ task.dueDate ? taskDueDateForDisplay.shortDate : "Schedule" }}
+      </button>
     </div>
     <div class="row">
       <button

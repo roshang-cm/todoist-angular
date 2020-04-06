@@ -14,6 +14,7 @@ import { TaskService } from "src/app/services/task.service";
 export class TaskContextualScheduleMenuComponent implements OnInit {
   task: Task;
   selectedDate = null;
+  shouldUpdate = true;
   constructor(
     private dialogRef: DialogOverlayRef,
     private dateService: DateService,
@@ -24,6 +25,9 @@ export class TaskContextualScheduleMenuComponent implements OnInit {
     this.task = Task.fromJson(this.dialogRef.data.contextData);
     if (this.task.dueDate) {
       this.selectedDate = this.task.dueDate;
+    }
+    if (this.dialogRef.data.otherData === "no-update") {
+      this.shouldUpdate = false;
     }
   }
 
@@ -53,13 +57,17 @@ export class TaskContextualScheduleMenuComponent implements OnInit {
   updateTaskRemoveDueDate() {
     this.task.dueDate = null;
     this.task.withTime = false;
-    this.taskService.updateTask(this.task, false, "Due date removed");
-    this.dialogRef.close();
+    if (this.shouldUpdate) {
+      this.taskService.updateTask(this.task, false, "Due date removed");
+    }
+    this.dialogRef.close(null);
   }
   updateTaskDateByDate(date) {
     const newDate = moment(date);
     this.task.dueDate = newDate;
-    this.taskService.updateTask(this.task, false, "Due date updated");
-    this.dialogRef.close();
+    if (this.shouldUpdate) {
+      this.taskService.updateTask(this.task, false, "Due date updated");
+    }
+    this.dialogRef.close(newDate);
   }
 }

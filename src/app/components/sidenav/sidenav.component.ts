@@ -42,12 +42,15 @@ export class SidenavComponent implements OnInit {
         return task.project == null;
       }),
       today: this.taskService.getCountByFilter((task) => {
+        if (!task.dueDate) return false;
         return task.dueDate.isSame(this.dateService.today, "day");
       }),
       tomorrow: this.taskService.getCountByFilter((task) => {
+        if (!task.dueDate) return false;
         return task.dueDate.isSame(this.dateService.tomorrow, "day");
       }),
       nextWeek: this.taskService.getCountByFilter((task) => {
+        if (!task.dueDate) return false;
         return task.dueDate.isSame(this.dateService.nextWeek, "day");
       }),
       byProject: (id: string) => {

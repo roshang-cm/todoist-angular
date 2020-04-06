@@ -19,5 +19,6 @@
     *ngIf="isAddTaskVisible"
     (cancel)="setAddTaskVisible(false)"
     (add)="addTask($event)"
+    [context]="context"
   ></app-add-task-panel>
 </main>

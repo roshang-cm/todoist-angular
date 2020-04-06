@@ -29,9 +29,9 @@ export class DialogOverlayRef {
     this.overlay.dispose();
     this.afterClosed$.next({
       type,
-      data
+      data,
     });
-
+    console.log("After closed emitted!");
     this.afterClosed$.complete();
   }
 

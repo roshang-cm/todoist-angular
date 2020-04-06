@@ -36,6 +36,7 @@ import { ProjectMenuComponent } from './shared/components/project-menu/project-m
 import { PrioritymenuComponent } from './shared/components/prioritymenu/prioritymenu.component';
 import { MenuItemComponentComponent } from './shared/components/menu-item-component/menu-item-component.component';
 import { TimeMenuComponent } from './shared/components/time-menu/time-menu.component';
+import { DeleteConfirmationDialogComponent } from './shared/components/delete-confirmation-dialog/delete-confirmation-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,7 +64,8 @@ import { TimeMenuComponent } from './shared/components/time-menu/time-menu.compo
     ProjectMenuComponent,
     PrioritymenuComponent,
     MenuItemComponentComponent,
-    TimeMenuComponent
+    TimeMenuComponent,
+    DeleteConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,

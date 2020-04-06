@@ -72,6 +72,17 @@ export class TaskService {
     console.log("ADDED NEW TASK ==> ", task.id);
   }
 
+  deleteTask(task: Task) {
+    this._tasks = this._tasks.filter((taskInList: Task) => {
+      return task.id !== taskInList.id;
+    });
+    this.toastService.show({
+      message: "Task deleted",
+    });
+    this.addToSyncActions(task, "DELETE_TASK");
+    this.sync();
+  }
+
   updateTask(task: Task, noToast: boolean = false, whatChanged: string = null) {
     task = Task.fromJson(task);
     console.log("Update task was called!");

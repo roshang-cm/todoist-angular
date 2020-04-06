@@ -5,6 +5,7 @@ import { DateService } from "src/app/services/date.service";
 import { DialogOverlayRef, DialogContext } from "src/app/services/dialogref";
 import { DialogService } from "src/app/services/dialog.service";
 import { TaskContextualScheduleMenuComponent } from "../task-contextual-schedule-menu/task-contextual-schedule-menu.component";
+import { DeleteConfirmationDialogComponent } from "../delete-confirmation-dialog/delete-confirmation-dialog.component";
 
 @Component({
   selector: "app-task-contextual-menu",
@@ -55,6 +56,22 @@ export class TaskContextualMenuComponent implements OnInit {
       TaskContextualScheduleMenuComponent,
       content
     );
+  }
+
+  onDeleteClicked() {
+    const ref = this.dialogService.openDialog(
+      DeleteConfirmationDialogComponent,
+      null
+    );
+    ref.afterClosed$.subscribe((result) => {
+      if (result.type === "close") {
+        if (result.data) {
+          //User wants to delete
+          this.taskService.deleteTask(this.task);
+          this.dialogRef.close();
+        }
+      }
+    });
   }
 
   ngOnInit(): void {

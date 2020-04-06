@@ -1,0 +1,23 @@
+<app-dialog-panel-ui>
+  <div class="modal-header">
+    <div class="title">
+      Delete task
+    </div>
+    <div class="spacer"></div>
+    <div class="actions"></div>
+  </div>
+  <div class="dialog-content">
+    Are you sure you want to delete the task? You cannot restore it later.
+  </div>
+  <div class="dialog-actions">
+    <div class="row">
+      <div class="spacer"></div>
+      <div class="actions">
+        <button class="outlined" (click)="onCloseClicked()">Cancel</button>
+        <button class="primary raised" (click)="onDeleteClicked()">
+          Delete task
+        </button>
+      </div>
+    </div>
+  </div>
+</app-dialog-panel-ui>

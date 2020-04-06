@@ -33,6 +33,9 @@ import { DialogPanelUiComponent } from "./shared/components/dialog-panel-ui/dial
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatMomentDateModule } from "@angular/material-moment-adapter";
 import { ProjectMenuComponent } from './shared/components/project-menu/project-menu.component';
+import { PrioritymenuComponent } from './shared/components/prioritymenu/prioritymenu.component';
+import { MenuItemComponentComponent } from './shared/components/menu-item-component/menu-item-component.component';
+import { TimeMenuComponent } from './shared/components/time-menu/time-menu.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +60,10 @@ import { ProjectMenuComponent } from './shared/components/project-menu/project-m
     NewProjectDialogComponent,
     DialogComponent,
     DialogPanelUiComponent,
-    ProjectMenuComponent
+    ProjectMenuComponent,
+    PrioritymenuComponent,
+    MenuItemComponentComponent,
+    TimeMenuComponent
   ],
   imports: [
     BrowserModule,

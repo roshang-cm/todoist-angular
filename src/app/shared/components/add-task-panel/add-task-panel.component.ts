@@ -5,6 +5,9 @@ import { TaskContextualScheduleMenuComponent } from "../task-contextual-schedule
 import { DialogContext } from "src/app/services/dialogref";
 import { DateService } from "src/app/services/date.service";
 import { TaskContext } from "src/app/components/tasks-view/tasks-view.component";
+import { ProjectService } from "src/app/services/project.service";
+import { ProjectMenuComponent } from "../project-menu/project-menu.component";
+import { PrioritymenuComponent } from "../prioritymenu/prioritymenu.component";
 
 @Component({
   selector: "app-add-task-panel",
@@ -23,6 +26,10 @@ export class AddTaskPanelComponent implements OnInit {
 
   get taskDueDateForDisplay() {
     return this.dateService.getReadableStrings(this.task.dueDate);
+  }
+
+  get taskProject() {
+    return this.projectService.getProjectById(this.task.project);
   }
   onAddTaskClicked() {
     if (this.task.title.length === 0) {
@@ -53,14 +60,52 @@ export class AddTaskPanelComponent implements OnInit {
     ref.afterClosed$.subscribe((date) => {
       console.log(date);
       if (date.type === "close") {
-        this.task.dueDate = date.data;
+        this.task.dueDate = date.data.dueDate;
+        if (date.data.withTime) {
+          this.task.withTime = true;
+        }
       }
     });
   }
 
+  showPriorityPopover(event: MouseEvent) {
+    const context: DialogContext = {
+      contextData: this.task,
+      contextType: "task",
+      otherData: "no-update",
+    };
+    const ref = this.dialogService.openPopover(
+      event.target,
+      PrioritymenuComponent,
+      context
+    );
+    ref.afterClosed$.subscribe((data) => {
+      if (data.type === "close") {
+        this.task.priority = data.data;
+      }
+    });
+  }
+  showProjectPopover(event: MouseEvent) {
+    const context: DialogContext = {
+      contextData: this.task,
+      contextType: "task",
+      otherData: "no-update",
+    };
+    const ref = this.dialogService.openPopover(
+      event.target,
+      ProjectMenuComponent,
+      context
+    );
+    ref.afterClosed$.subscribe((data) => {
+      if (data.type === "close") {
+        this.task.project = data.data;
+      }
+    });
+  }
   constructor(
     private dialogService: DialogService,
-    private dateService: DateService
+    private dateService: DateService,
+    private projectService: ProjectService
   ) {}
 
   ngOnInit(): void {

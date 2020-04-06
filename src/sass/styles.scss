@@ -88,6 +88,11 @@ button:disabled {
   box-shadow: 0px 2px 5px 0px rgba(81, 81, 81, 0.17);
 }
 
+.actions {
+  display: flex;
+  align-items: center;
+}
+
 .actions > * {
   margin-right: 8px;
 }

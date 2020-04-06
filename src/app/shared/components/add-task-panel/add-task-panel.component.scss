@@ -28,3 +28,37 @@ input {
 .row {
   margin: 6px 0px;
 }
+
+.dot {
+  background-color: black;
+  width: 10px;
+  height: 10px;
+  color: black;
+  display: inline-block;
+  border-radius: 50%;
+}
+
+.title-section {
+  display: flex;
+  flex-direction: column;
+  * {
+    margin: 0;
+  }
+
+  h1 {
+    font-size: 1rem;
+    padding: 0px;
+    font-weight: normal;
+  }
+  h2 {
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 0px;
+    margin-top: 4px;
+    color: rgb(0, 148, 57);
+  }
+}
+
+.actions {
+  display: flex;
+}

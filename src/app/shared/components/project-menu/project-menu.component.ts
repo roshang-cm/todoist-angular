@@ -13,6 +13,7 @@ export class ProjectMenuComponent implements OnInit {
   task: Task;
   project: Project;
   query: string = "";
+  shouldUpdate = true;
   constructor(
     private dialogRef: DialogOverlayRef,
     private taskService: TaskService,
@@ -22,8 +23,13 @@ export class ProjectMenuComponent implements OnInit {
   get projectSearchResults(): Project[] {
     return this.projectService.search(this.query);
   }
+
   ngOnInit(): void {
     const task = this.dialogRef.data.contextData;
+    if (this.dialogRef.data.otherData) {
+      const otherData: string = this.dialogRef.data.otherData;
+      if (otherData.includes("no-update")) this.shouldUpdate = false;
+    }
     this.task = Task.fromJson(task);
     if (this.task.project) {
       this.project = this.projectService.getProjectById(this.task.project);
@@ -34,7 +40,9 @@ export class ProjectMenuComponent implements OnInit {
 
   onProjectClicked(project: Project) {
     this.task.project = project.id;
-    this.taskService.updateTask(this.task, false, "Project assigned to task");
-    this.dialogRef.close();
+    if (this.shouldUpdate) {
+      this.taskService.updateTask(this.task, false, "Project assigned to task");
+    }
+    this.dialogRef.close(project.id);
   }
 }

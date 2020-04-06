@@ -20,6 +20,19 @@
       (selectedChange)="onDateChanged($event)"
     ></mat-calendar>
     <hr />
-    <app-menu-item icon="add"> Add time </app-menu-item>
+    <app-menu-item
+      *ngIf="!task.withTime"
+      (click)="showTimeMenuPopover($event)"
+      icon="add"
+    >
+      Add time
+    </app-menu-item>
+    <app-menu-item
+      *ngIf="task.withTime"
+      (click)="showTimeMenuPopover($event)"
+      icon="edit"
+    >
+      Edit time
+    </app-menu-item>
   </div>
 </div>

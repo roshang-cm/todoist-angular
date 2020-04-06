@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="menu">
+    <app-menu-item
+      (click)="onPriorityClicked(0)"
+      icon="outlined_flag"
+      [selected]="!priority"
+    >
+      No Priority
+    </app-menu-item>
+    <app-menu-item
+      (click)="onPriorityClicked(1)"
+      icon="flag"
+      iconColor="#325ecf"
+      [selected]="priority == 1"
+    >
+      Priority 1
+    </app-menu-item>
+    <app-menu-item
+      (click)="onPriorityClicked(2)"
+      icon="flag"
+      iconColor="#e69719"
+      [selected]="priority == 2"
+    >
+      Priority 2
+    </app-menu-item>
+    <app-menu-item
+      (click)="onPriorityClicked(3)"
+      icon="flag"
+      iconColor="#e61919"
+      [selected]="priority == 3"
+    >
+      Priority 3
+    </app-menu-item>
+  </div>
+</div>

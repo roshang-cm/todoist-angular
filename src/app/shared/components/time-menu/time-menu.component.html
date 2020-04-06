@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="menu">
+    <div class="section-header">
+      <span>Enter a time</span>
+      <div class="field">
+        <input type="time" [(ngModel)]="inputTime" />
+        <app-icon-button>delete</app-icon-button>
+      </div>
+    </div>
+    <div class="actions">
+      <div class="spacer"></div>
+      <button (click)="onCancelClicked()">Cancel</button>
+      <button (click)="onSetTimeClicked()" class="primary">Set time</button>
+    </div>
+  </div>
+</div>

@@ -28,7 +28,23 @@
       <button (click)="onCancelClicked()">Cancel</button>
 
       <div class="spacer"></div>
-      <button>Actions</button>
+      <div class="actions">
+        <div class="title-section" *ngIf="task.project">
+          <h2 style="color: black; cursor: pointer;">
+            <span
+              class="dot"
+              [style.backgroundColor]="taskProject.color"
+            ></span>
+            {{ taskProject.name }}
+          </h2>
+        </div>
+        <app-icon-button title="Project" (click)="showProjectPopover($event)"
+          >assignment</app-icon-button
+        >
+        <app-icon-button (click)="showPriorityPopover($event)" title="Priority"
+          >outlined_flag</app-icon-button
+        >
+      </div>
     </div>
   </div>
 </div>
